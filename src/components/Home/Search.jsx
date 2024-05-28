@@ -9,8 +9,8 @@ const Search = () => {
         <div
           className={`${
             active === "buy"
-              ? "p-2 bg-black w-1/2 border text-center text-lg border-black rounded-tl-lg border-b-0 border-r-0 text-white"
-              : "p-2 border w-1/2 text-center rounded-tl-lg border-black border-b-0 border-r-0 text-lg"
+              ? "p-2 bg-black w-1/2 border text-center text-lg border-black rounded-tl-lg border-b-0 border-r-0 text-white cursor-pointer"
+              : "p-2 border w-1/2 text-center rounded-tl-lg border-black border-b-0 border-r-0 text-lg cursor-pointer"
           }`}
           onClick={() => setActive("buy")}
         >
@@ -19,8 +19,8 @@ const Search = () => {
         <div
           className={`${
             active === "rent"
-              ? "p-2 bg-black w-1/2 border text-center text-lg border-black border-b-0 rounded-tr-lg text-white"
-              : "p-2 border w-1/2 text-center rounded-tr-lg border-black border-b-0 text-lg"
+              ? "p-2 bg-black w-1/2 border text-center text-lg border-black border-b-0 rounded-tr-lg text-white cursor-pointer"
+              : "p-2 border w-1/2 text-center rounded-tr-lg border-black border-b-0 text-lg cursor-pointer"
           }`}
           onClick={() => setActive("rent")}
         >

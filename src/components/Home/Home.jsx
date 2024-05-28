@@ -8,9 +8,6 @@ const Home = () => {
   return (
     <>
       <div className={`${styles.layout}`}>
-        <div className="px-3 lg:px-12">
-          <Navbar />
-        </div>
         <Splash />
       </div>
     </>
