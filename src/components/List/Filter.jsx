@@ -4,10 +4,10 @@ import style from "./filter.module.css";
 
 const Filter = () => {
   return (
-    <div className="p-2">
+    <div className="p-5 ">
       <label className="my-3 text-lg">Search results for</label>
-      <form className="my-3">
-        <div>
+      <form className="my-3 ">
+        <div className="flex flex-col ">
           <label>Location</label>
           <input
             type="text"
@@ -16,15 +16,15 @@ const Filter = () => {
             className="w-full p-2 border border-slate-400 rounded-md"
           />
         </div>
-        <div className="flex justify-between items-center my-3">
-          <div>
+        <div className="flex justify-between flex-wrap sm:flex-nowrap  items-center my-3">
+          <div className="flex flex-col">
             <label htmlFor="type" className="text-sm">
               Type
             </label>
             <select
               id="type"
               name="type"
-              className="p-1 border border-slate-400 rounded-md"
+              className="p-1 border text-sm md:text-md border-slate-400 rounded-md"
             >
               <option value="type1" defaultChecked>
                 Type 1
@@ -33,12 +33,12 @@ const Filter = () => {
               <option value="type3">Type 3</option>
             </select>
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="property">Type</label>
             <select
               id="property"
               name="property"
-              className="p-1 border border-slate-400 rounded-md"
+              className="p-1 border text-sm md:text-md border-slate-400 rounded-md"
             >
               <option value="property1" defaultChecked>
                 Type 1
@@ -47,7 +47,7 @@ const Filter = () => {
               <option value="property3">Type 3</option>
             </select>
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="minPrice">Min Price</label>
             <input
               type="number"
@@ -55,10 +55,10 @@ const Filter = () => {
               min={0}
               max={1000000}
               placeholder="any"
-              className="p-1 border border-slate-400 rounded-md"
+              className="p-1 border text-sm md:text-md border-slate-400 rounded-md"
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="maxPrice">Max Price</label>
             <input
               type="number"
@@ -66,10 +66,10 @@ const Filter = () => {
               min={0}
               max={1000000}
               placeholder="any"
-              className="p-1 border border-slate-400 rounded-md"
+              className="p-1 border text-sm md:text-md border-slate-400 rounded-md"
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="bedroom">Bedroom</label>
             <input
               type="number"
@@ -77,10 +77,10 @@ const Filter = () => {
               min={0}
               max={5}
               placeholder="any"
-              className="p-1 border border-slate-400 rounded-md"
+              className="p-1 border text-sm md:text-md border-slate-400 rounded-md"
             />
           </div>
-          <button className="h-full w-20 p-3 bg-yellow-300 flex justify-center items-center rounded-md">
+          <button className="h-full w-10 sm:w-20 p-3 m-1 bg-yellow-300 flex justify-center items-center rounded-md">
             <img src={search} alt="search" />
           </button>
         </div>
