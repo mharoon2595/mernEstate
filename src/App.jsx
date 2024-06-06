@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ListPage from "./components/List/ListPage";
 import Layout from "./components/Layout/Layout";
+import PropDetails from "./components/PropDetails/PropDetails";
 
 function App() {
   const route = createBrowserRouter([
@@ -20,6 +21,7 @@ function App() {
           path: "/list",
           element: <ListPage />,
         },
+        { path: "list/1", element: <PropDetails /> },
       ],
     },
   ]);
