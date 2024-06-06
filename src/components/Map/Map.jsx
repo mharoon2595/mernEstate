@@ -20,9 +20,7 @@ const Map = ({ data }) => {
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker> */}
-      {data.map((item) => (
-        <Pin item={item} />
-      ))}
+      {data && data.map((item) => <Pin item={item} />)}
     </MapContainer>
   );
 };
