@@ -7,12 +7,12 @@ const PropDetails = () => {
   return (
     <>
       <div className="hidden md:flex absolute w-2/5 h-full bg-[#FFDAB9] z-[-1] right-0 top-0"></div>
-      <div className="flex h-[1000px]">
-        <div className="hidden md:flex md:flex-col md:gap-5 md:w-3/5 md:bg-slate-400 md:h-full">
+      <div className="flex min-h-[calc(100vh-120px)]">
+        <div className="hidden md:flex md:flex-col md:gap-5 md:w-3/5 md:min-h-full">
           <Snaps />
           <PropDesc />
         </div>
-        <div className="hidden md:flex md:flex-col md:w-2/5 gap-3 md:h-full md:p-5">
+        <div className="hidden md:flex md:flex-col md:w-2/5 gap-3 md:min-h-full md:p-5">
           General
           <div className=" bg-white p-2 rounded-md flex flex-col gap-5">
             <div>
@@ -50,7 +50,9 @@ const PropDetails = () => {
             </div>
           </div>
           Location
-          <Map />
+          <div className="h-full">
+            <Map />
+          </div>
           <div className="flex justify-between">
             <button className="bg-white border-2 border-yellow-300  p-3 rounded-md">
               Send a message
