@@ -9,7 +9,9 @@ const Navbar = () => {
   return (
     <>
       {modalActive && <Backdrop onClick={() => setModalActive(false)} />}
-      {modalActive && <Modal onClick={() => setModalActive(false)} />}
+      {modalActive && (
+        <Modal active={modalActive} onClick={() => setModalActive(false)} />
+      )}
       <div className="flex p-1 lg:p-3 justify-between items-center">
         <div className="flex gap-5 lg:gap-7 p-4 items-center">
           <img
