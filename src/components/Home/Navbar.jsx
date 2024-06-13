@@ -6,13 +6,14 @@ import Modal from "./Modal";
 
 const Navbar = () => {
   const [modalActive, setModalActive] = useState(false);
+  const user = true;
   return (
     <>
       {modalActive && <Backdrop onClick={() => setModalActive(false)} />}
       {modalActive && (
         <Modal active={modalActive} onClick={() => setModalActive(false)} />
       )}
-      <div className="flex p-1 lg:p-3 justify-between items-center">
+      <div className="flex  justify-between items-center">
         <div className="flex gap-5 lg:gap-7 p-4 items-center">
           <img
             src={hamburger}
@@ -37,18 +38,49 @@ const Navbar = () => {
             Agents
           </div>
         </div>
+
         <div className="sm:hidden p-2">
-          <button className="p-2 bg-yellow-500 rounded-lg">
-            Login / Signup
-          </button>
+          {user ? (
+            <button className="relative p-2 flex gap-2 bg-yellow-500 rounded-lg items-center">
+              <div className="absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full">
+                8
+              </div>
+              <img
+                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                className="h-10 w-10 rounded-full"
+              />
+              <p>John Doe</p>
+              <button className="rotate-90">{">"}</button>
+            </button>
+          ) : (
+            <button className="p-2 bg-yellow-500 rounded-lg">
+              Login / Signup
+            </button>
+          )}
         </div>
-        <div className="hidden sm:flex gap-2 md:gap-5 md:border md:border-black rounded-lg p-2">
-          <button className="p-2 hover:scale-110">Sign up</button>
-          <div className="p-2 text-lg">|</div>
-          <button className="p-2 bg-yellow-500 rounded-lg">
-            <div className="hover:scale-105">Sign in</div>
-          </button>
-        </div>
+        {user ? (
+          <div className="hidden sm:flex items-center gap-2 md:gap-5">
+            <img
+              src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              className="h-12 w-12 md:h-14 md:w-14 rounded-full"
+            />
+            <p className="font-bold text-md">John Doe</p>
+            <button className="p-3 relative bg-yellow-500 rounded-lg text-md font-semibold">
+              <div className="absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full">
+                8
+              </div>
+              Profile
+            </button>
+          </div>
+        ) : (
+          <div className="hidden sm:flex gap-2 md:gap-5 md:border md:border-black rounded-lg p-2">
+            <button className="p-2 hover:scale-110">Sign up</button>
+            <div className="p-2 text-lg">|</div>
+            <button className="p-2 bg-yellow-500 rounded-lg">
+              <div className="hover:scale-105">Sign in</div>
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

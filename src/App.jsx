@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ListPage from "./components/List/ListPage";
 import Layout from "./components/Layout/Layout";
 import PropDetails from "./components/PropDetails/PropDetails";
+import Main from "./components/ProfilePage/Main";
 
 function App() {
   const route = createBrowserRouter([
@@ -21,7 +22,8 @@ function App() {
           path: "/list",
           element: <ListPage />,
         },
-        { path: "list/1", element: <PropDetails /> },
+        { path: "/list/1", element: <PropDetails /> },
+        { path: "/1/profile", element: <Main /> },
       ],
     },
   ]);
