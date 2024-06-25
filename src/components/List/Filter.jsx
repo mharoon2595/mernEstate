@@ -1,8 +1,14 @@
 import React from "react";
 import search from "../../assets/search.png";
 import style from "./filter.module.css";
+import { useSearchParams } from "react-router-dom";
 
 const Filter = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState({});
+
+  console.log(searchParams.get("city"));
+
   return (
     <div className="p-5 ">
       <label className="my-3 text-lg">Search results for</label>
@@ -26,11 +32,11 @@ const Filter = () => {
               name="type"
               className="p-1 border text-sm md:text-md border-slate-400 rounded-md"
             >
-              <option value="type1" defaultChecked>
-                Type 1
+              <option value="" defaultChecked>
+                Any
               </option>
-              <option value="type2">Type 2</option>
-              <option value="type3">Type 3</option>
+              <option value="buy">Buy</option>
+              <option value="rent">Rent</option>
             </select>
           </div>
           <div className="flex flex-col">
@@ -40,11 +46,13 @@ const Filter = () => {
               name="property"
               className="p-1 border text-sm md:text-md border-slate-400 rounded-md"
             >
-              <option value="property1" defaultChecked>
-                Type 1
+              <option value="" defaultChecked>
+                Any
               </option>
-              <option value="property2">Type 2</option>
-              <option value="property3">Type 3</option>
+              <option value="apartment">Apartment</option>
+              <option value="house">House</option>
+              <option value="condo">Condo</option>
+              <option value="land">Land</option>
             </select>
           </div>
           <div className="flex flex-col">

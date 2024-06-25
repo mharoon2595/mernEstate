@@ -6,7 +6,11 @@ import Pin from "./Pin";
 const Map = ({ data }) => {
   return (
     <MapContainer
-      center={[52.4797, -1.98269]}
+      center={
+        data.length === 1
+          ? [data[0].latitude, data[0].longitude]
+          : [52.4797, -1.98269]
+      }
       zoom={7}
       scrollWheelZoom={true}
       className="h-full min-w-full min-h-[200px] z-0"
@@ -20,7 +24,7 @@ const Map = ({ data }) => {
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker> */}
-      {data && data.map((item) => <Pin item={item} />)}
+      {data && data.map((item) => <Pin key={item.id} item={item} />)}
     </MapContainer>
   );
 };

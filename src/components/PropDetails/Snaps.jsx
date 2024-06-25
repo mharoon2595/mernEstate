@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { singlePostData } from "../../../lib/dummyData";
 import Slider from "./Slider";
 
-const Snaps = () => {
-  const { images } = singlePostData;
+const Snaps = ({ images }) => {
   const [show, setShow] = useState(false);
   const [imgNum, setImgNum] = useState();
 

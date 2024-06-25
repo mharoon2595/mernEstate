@@ -1,19 +1,34 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Filter from "./Filter";
 import Data from "./Data";
 import Map from "../Map/Map";
-import { listData } from "../../../lib/dummyData";
+import { Await, useLoaderData } from "react-router-dom";
+import LoadingSpinner from "../../utils/LoadingSpinner";
 
 const ListPage = () => {
-  const data = listData;
+  const data = useLoaderData();
   return (
     <div className="flex flex-col-reverse lg:flex-row gap-2 px-3 lg:px-14 w-full lg:h-[calc(100vh-140px)]">
       <div className=" lg:w-3/5 ">
         <Filter />
-        <Data />
+        <Suspense fallback={<LoadingSpinner asOverlay />}>
+          <Await
+            resolve={data.postResponse}
+            errorElement={<p>Error loading posts!</p>}
+          >
+            {(postResponse) => <Data data={postResponse.data} />}
+          </Await>
+        </Suspense>
       </div>
       <div className="w-full lg:w-2/5 h-[25vh] lg:h-full">
-        <Map data={data} />
+        <Suspense fallback={<LoadingSpinner asOverlay />}>
+          <Await
+            resolve={data.postResponse}
+            errorElement={<p>Error loading posts!</p>}
+          >
+            {(postResponse) => <Map data={postResponse.data} />}
+          </Await>
+        </Suspense>
       </div>
     </div>
   );
