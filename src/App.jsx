@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import Home from "./components/Home/Home";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ListPage from "./components/List/ListPage";
@@ -12,6 +9,10 @@ import { ContextProvider } from "./utils/Context";
 import UpdateProfile from "./components/ProfilePage/UpdateProfile";
 import NewPost from "./components/newPostPage/NewPost.jsx";
 import { listLoader, singlePageLoader } from "../lib/loaders.js";
+import LoadingSpinner from "./utils/LoadingSpinner.jsx";
+import About from "./components/About/About.jsx";
+import Contact from "./components/Contact/Contact.jsx";
+import Agents from "./components/Agents/Agents.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -34,6 +35,9 @@ function App() {
           loader: singlePageLoader,
         },
         { path: "/signin", element: <UserLogin /> },
+        { path: "/about", element: <About /> },
+        { path: "/agents", element: <Agents /> },
+        { path: "/contact", element: <Contact /> },
       ],
     },
     {
@@ -59,7 +63,10 @@ function App() {
   return (
     <>
       <ContextProvider>
-        <RouterProvider router={route} />
+        <RouterProvider
+          router={route}
+          fallbackElement={<LoadingSpinner asOverlay />}
+        />
       </ContextProvider>
     </>
   );

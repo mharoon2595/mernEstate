@@ -21,6 +21,9 @@ const Navbar = () => {
     setUpdateFlag,
     profilePic,
     existingAvatar,
+    setExistingAvatar,
+    setUserId,
+    setEmail,
   } = loggedin;
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
@@ -31,6 +34,10 @@ const Navbar = () => {
       await apiRequest.post("/auth/logout");
       localStorage.removeItem("user");
       setLoggedIn(false);
+      setEmail("");
+      setUserId("");
+      setExistingAvatar("");
+      navigate("/");
     } catch (err) {
       swal("Oops", "Something went wrong, please try again in a bit!", "error");
     }

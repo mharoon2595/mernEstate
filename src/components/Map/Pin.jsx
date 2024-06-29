@@ -8,7 +8,7 @@ const Pin = ({ item }) => {
       <Popup>
         <div className="flex  gap-5 min-w-[200px]">
           <img
-            src={item.img}
+            src={item.images[0]}
             className="w-[78px] h-[64px] object-cover rounded-md"
             alt=""
           />

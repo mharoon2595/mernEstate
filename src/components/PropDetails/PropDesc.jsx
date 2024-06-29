@@ -2,8 +2,7 @@ import React from "react";
 import DOMPurify from "dompurify";
 import pin from "../../assets/pin.png";
 
-const PropDesc = ({ props }) => {
-  const { title, address, price, user, postDetail } = props;
+const PropDesc = ({ title, address, price, user, postDetail }) => {
   return (
     <div className="h-[300px] md:h-[40%] mx-3 p-2">
       <div className="info">

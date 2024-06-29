@@ -1,17 +1,31 @@
-import React from "react";
-import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import Pin from "./Pin";
+import Pin from "./Pin"; // Make sure to import the Pin component
+
+const MapCenterUpdater = ({ center, zoom }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (center) {
+      map.setView(center);
+    }
+    if (zoom) {
+      map.setZoom(zoom);
+    }
+  }, [center, zoom]);
+
+  return null;
+};
 
 const Map = ({ data }) => {
+  const center =
+    data.length > 0 ? [data[0].latitude, data[0].longitude] : [0, 0];
+  const zoom = data.length > 0 ? 7 : 1;
+
   return (
     <MapContainer
-      center={
-        data.length === 1
-          ? [data[0].latitude, data[0].longitude]
-          : [52.4797, -1.98269]
-      }
-      zoom={7}
+      center={center}
+      zoom={zoom}
       scrollWheelZoom={true}
       className="h-full min-w-full min-h-[200px] z-0"
     >
@@ -19,12 +33,8 @@ const Map = ({ data }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <Marker position={[52.4797, -1.98269]}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker> */}
-      {data && data.map((item) => <Pin key={item.id} item={item} />)}
+      <MapCenterUpdater center={center} zoom={zoom} />
+      {data.length > 0 && data.map((item) => <Pin key={item.id} item={item} />)}
     </MapContainer>
   );
 };

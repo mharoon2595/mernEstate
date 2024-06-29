@@ -5,6 +5,7 @@ import UpdateProfile from "./UpdateProfile";
 import noavatar from "../../assets/noavatar.jpg";
 import { UserContext } from "../../utils/Context";
 import UploadWidget from "../uploadWidget/UploadWidget";
+import Messages from "./Messages";
 
 const Main = () => {
   const { updateFlag, existingAvatar, setProfilePic, profilePic } =
@@ -45,7 +46,10 @@ const Main = () => {
               </div>
             </>
           ) : (
-            <p>Messages</p>
+            <>
+              <p>Messages</p>
+              <Messages />
+            </>
           )}
         </div>
       </div>
