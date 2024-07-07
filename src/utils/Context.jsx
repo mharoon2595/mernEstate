@@ -1,6 +1,16 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 
-export const UserContext = createContext({});
+export const UserContext = createContext({
+  setUsername: () => {},
+  setLoggedIn: () => {},
+  setEmail: () => {},
+  setUserId: () => {},
+  setExistingAvatar: () => {},
+  token: null,
+  setToken: () => {},
+  tokenExpirationTime: null,
+  setTokenExpirationTime: () => {},
+});
 
 export const ContextProvider = ({ children }) => {
   const [signIn, setSignIn] = useState(false);
@@ -11,6 +21,36 @@ export const ContextProvider = ({ children }) => {
   const [updateFlag, setUpdateFlag] = useState(false);
   const [profilePic, setProfilePic] = useState("");
   const [existingAvatar, setExistingAvatar] = useState("");
+  const [loadProfile, setLoadProfile] = useState("");
+  const [updatePost, setUpdatePost] = useState("");
+  const [token, setToken] = useState();
+  const [modalHeight, setModalHeight] = useState(false);
+  const [tokenExpirationTime, setTokenExpirationTime] = useState(null);
+  const [msgID, setMsgID] = useState();
+
+  const login = (uid, username, token, avatar, email, expirationTime) => {
+    setUserId(uid);
+    setUsername(username);
+    setLoggedIn(true);
+    setEmail(email);
+    setExistingAvatar(avatar);
+    const tokenExpirationDate =
+      expirationTime || new Date(new Date().getTime() + 1000 * 60 * 60);
+    setTokenExpirationTime(tokenExpirationDate);
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        id: uid,
+        token: token,
+        username: username,
+        expiry: tokenExpirationDate.toISOString(),
+        avatar: avatar,
+        email: email,
+      })
+    );
+    setToken(token);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -30,6 +70,19 @@ export const ContextProvider = ({ children }) => {
         setProfilePic,
         existingAvatar,
         setExistingAvatar,
+        loadProfile,
+        setLoadProfile,
+        updatePost,
+        setUpdatePost,
+        modalHeight,
+        setModalHeight,
+        token,
+        setToken,
+        login,
+        tokenExpirationTime,
+        setTokenExpirationTime,
+        msgID,
+        setMsgID,
       }}
     >
       {children}

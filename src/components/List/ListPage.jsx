@@ -43,6 +43,7 @@ const ListPage = () => {
             >
               {(postResponse) => {
                 setResolvedData(postResponse);
+
                 return <Data data={postResponse.data} />;
               }}
             </Await>

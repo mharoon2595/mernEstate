@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import DOMPurify from "dompurify";
 import pin from "../../assets/pin.png";
+import { UserContext } from "../../utils/Context";
 
 const PropDesc = ({ title, address, price, user, postDetail }) => {
   return (
-    <div className="h-[300px] md:h-[40%] mx-3 p-2">
+    <div className=" md:h-[40%] mx-3 p-2">
       <div className="info">
         <div className="flex justify-between">
           <div className="flex flex-col gap-2">
@@ -21,7 +22,7 @@ const PropDesc = ({ title, address, price, user, postDetail }) => {
           </div>
         </div>
         <div
-          className="my-7"
+          className="py-5 "
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(postDetail.desc),
           }}

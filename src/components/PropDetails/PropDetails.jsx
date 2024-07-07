@@ -9,14 +9,18 @@ import bath from "../../assets/bath.png";
 import LoadingSpinner from "../../utils/LoadingSpinner";
 import { UserContext } from "../../utils/Context";
 import apiRequest from "../../../lib/apiRequest";
+import MessageModal from "../ProfilePage/MessageModal";
+import Backdrop from "../Home/Backdrop";
 
 const PropDetails = () => {
   const post = useLoaderData();
   const params = useParams();
   const [data, setData] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [ownerID, setOwnerID] = useState();
   const userData = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [popUp, setPopUp] = useState(false);
   const navigate = useNavigate();
 
   console.log(params.id);
@@ -44,6 +48,17 @@ const PropDetails = () => {
     }
   };
 
+  const addChat = async () => {
+    if (!userData.userId) {
+      navigate("/signin");
+    }
+    const setUpChat = await apiRequest.post("/chats", {
+      receiverId: ownerID,
+    });
+
+    setPopUp(true);
+  };
+
   return (
     <Suspense fallback={<LoadingSpinner asOverlay />}>
       <Await
@@ -56,10 +71,13 @@ const PropDetails = () => {
           const { title, address, price, user, postDetail } = postResponse.data;
           console.log(postResponse.data);
           setData(postResponse.data.isSaved);
+          setOwnerID(user.id);
           return (
             <>
-              <div className="hidden md:flex absolute w-2/5 h-full bg-[#FFDAB9] z-[-1] right-0 top-0"></div>
-              <div className="flex flex-col h-full md:flex-row md:min-h-[calc(100vh-120px)]">
+              <div className="hidden md:flex absolute w-2/5 min-h-full bg-[#FFDAB9] z-[-1] right-0 top-0"></div>
+              <div className="flex flex-col h-full md:flex-row md:min-h-full">
+                {popUp && <Backdrop show={() => setPopUp(false)} />}
+                {popUp && <MessageModal show={setPopUp} full />}
                 <div className="block md:flex md:flex-col md:gap-5 md:w-3/5 md:min-h-full">
                   <Snaps images={postResponse.data.images} />
                   <PropDesc
@@ -71,10 +89,10 @@ const PropDetails = () => {
                   />
                 </div>
                 <div className="block p-2 md:flex md:flex-col md:w-2/5 gap-3 md:min-h-full md:p-5">
-                  <div>General</div>
+                  <div className="font-bold">General</div>
                   <div className="bg-white p-2 rounded-md flex flex-col gap-5">
                     <div>
-                      <p className="font-bold">Utilities</p>
+                      <p className="font-semibold">Utilities</p>
                       <p>
                         {postResponse.data.postDetail.utilities === "owner"
                           ? "Owner is responsible"
@@ -82,34 +100,47 @@ const PropDetails = () => {
                       </p>
                     </div>
                     <div>
-                      <p className="font-bold">Pet policy</p>
+                      <p className="font-semibold">Pet policy</p>
                       <p>
                         {postResponse.data.postDetail.pet === "allowed"
                           ? "Pets are allowed"
                           : "Pets are not allowed"}
                       </p>
                     </div>
+
                     <div>
-                      <p className="font-bold">Income policy</p>
+                      <p className="font-semibold">Income policy</p>
                       <p>{postResponse.data.postDetail.income}</p>
                     </div>
                   </div>
-                  <div>Room sizes</div>
-                  <div className="flex justify-between">
-                    <div className="flex gap-2 p-2 bg-white rounded-md items-center">
-                      <img src={size} className="w-5 h-5" alt="size icon" />
+                  <div className="my-2 font-bold">Room sizes</div>
+                  <div className="flex justify-between ">
+                    <div className="flex gap-2 p-2 bg-white rounded-md items-center max-w-[30%] overflow-hidden">
+                      <img
+                        src={size}
+                        className="hidden lg:block w-5 h-5"
+                        alt="size icon"
+                      />
                       <div>{`${postResponse.data.postDetail.size} sq.m`}</div>
                     </div>
-                    <div className="flex gap-2 p-2 bg-white rounded-md items-center">
-                      <img src={bed} className="w-5 h-5" alt="bed icon" />
+                    <div className="flex gap-2 p-2 bg-white rounded-md items-center max-w-[30%] overflow-hidden">
+                      <img
+                        src={bed}
+                        className="hidden lg:block w-5 h-5"
+                        alt="bed icon"
+                      />
                       <div>
                         {postResponse.data.bedroom === 1
                           ? "1 bedroom"
                           : `${postResponse.data.bedroom} bedrooms`}
                       </div>
                     </div>
-                    <div className="flex gap-2 p-2 bg-white rounded-md items-center">
-                      <img src={bath} className="w-5 h-5" alt="bath icon" />
+                    <div className="flex gap-2 p-2 bg-white rounded-md items-center max-w-[30%] overflow-hidden">
+                      <img
+                        src={bath}
+                        className="hidden lg:block w-5 h-5"
+                        alt="bath icon"
+                      />
                       <div>
                         {postResponse.data.bathroom === 1
                           ? "1 bathroom"
@@ -117,32 +148,41 @@ const PropDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div>Nearby places</div>
+                  <div className="font-bold">Nearby places</div>
                   <div className="bg-white p-3 flex justify-between rounded-md">
                     <div>
-                      <p>School</p>
+                      <p className="font-semibold">School</p>
                       <p>250m away</p>
                     </div>
                     <div>
-                      <p>Bus stop</p>
+                      <p className="font-semibold">Bus stop</p>
                       <p>100m away</p>
                     </div>
                     <div>
-                      <p>Restaurant</p>
+                      <p className="font-semibold">Restaurant</p>
                       <p>200m away</p>
                     </div>
                   </div>
                   <div>Location</div>
-                  <div className="h-full">
+                  <div className="h-[200px] md:h-[300px]">
                     <Map data={[postResponse.data]} />
                   </div>
-                  <div className="flex justify-between">
-                    <button className="bg-white border-2 border-yellow-300 p-3 rounded-md">
+                  <div className="flex justify-between my-2">
+                    <button
+                      className={`${
+                        ownerID === userData.userId
+                          ? "hidden"
+                          : "bg-white border-2 border-yellow-300 p-3 rounded-md"
+                      }`}
+                      onClick={addChat}
+                    >
                       Send a message
                     </button>
                     <button
                       className={`${
-                        isSaved && userData.loggedIn
+                        ownerID === userData.userId
+                          ? "hidden"
+                          : isSaved && userData.loggedIn
                           ? "bg-yellow-500"
                           : "bg-white"
                       } border-2 border-yellow-300 p-3 rounded-md relative`}

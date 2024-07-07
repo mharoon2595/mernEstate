@@ -9,9 +9,11 @@ const MyList = () => {
   const [data, setData] = useState();
   const [savedData, setSavedData] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [changeMade, setChangeMade] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("change detected from fetch all posts");
       setIsLoading(true);
       try {
         const data = await apiRequest("/post/myposts");
@@ -25,6 +27,7 @@ const MyList = () => {
       }
     };
     const fetchSavedPosts = async () => {
+      console.log("change detected from fetch saved posts");
       setIsLoading(true);
       try {
         const data = await apiRequest("/user/savedposts");
@@ -39,18 +42,36 @@ const MyList = () => {
     };
     fetchData();
     fetchSavedPosts();
-  }, []);
+  }, [changeMade]);
   return (
-    <div className="p-3">
+    <div className="p-3 ">
       <div className="flex justify-between items-center p-3">
         <p className="text-lg">My List</p>
-        <button className="bg-yellow-500 p-3" onClick={() => navigate("/add")}>
+        <button
+          className="bg-yellow-500 p-3 rounded-lg"
+          onClick={() => navigate("/add")}
+        >
           Add New Post
         </button>
       </div>
-      <Data profile data={data} isLoading={isLoading} />
-      <div className="p-3 text-lg">Saved Posts</div>
-      <Data save data={savedData} isLoading={isLoading} />
+      <div className="overflow-y-auto h-[calc(100vh-490px)]">
+        <Data
+          profile
+          save={false}
+          data={data}
+          isLoading={isLoading}
+          fromProfile
+          change={setChangeMade}
+        />
+        <div className="p-3 text-lg">Saved Posts</div>
+        <Data
+          save={true}
+          data={savedData}
+          isLoading={isLoading}
+          fromProfile
+          change={setChangeMade}
+        />
+      </div>
     </div>
   );
 };

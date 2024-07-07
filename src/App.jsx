@@ -5,7 +5,7 @@ import { Layout, RequireAuth } from "./components/Layout/Layout";
 import PropDetails from "./components/PropDetails/PropDetails";
 import Main from "./components/ProfilePage/Main";
 import UserLogin from "./components/Login/Login";
-import { ContextProvider } from "./utils/Context";
+import { ContextProvider, UserContext } from "./utils/Context";
 import UpdateProfile from "./components/ProfilePage/UpdateProfile";
 import NewPost from "./components/newPostPage/NewPost.jsx";
 import { listLoader, singlePageLoader } from "../lib/loaders.js";
@@ -13,6 +13,9 @@ import LoadingSpinner from "./utils/LoadingSpinner.jsx";
 import About from "./components/About/About.jsx";
 import Contact from "./components/Contact/Contact.jsx";
 import Agents from "./components/Agents/Agents.jsx";
+import AgentProfilePage from "./components/Agents/AgentProfilePage.jsx";
+import { useContext, useEffect, useState, useCallback } from "react";
+import { SocketContextProvider } from "./utils/SocketContext.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -38,6 +41,7 @@ function App() {
         { path: "/about", element: <About /> },
         { path: "/agents", element: <Agents /> },
         { path: "/contact", element: <Contact /> },
+        { path: "/agentProfile", element: <AgentProfilePage /> },
       ],
     },
     {
@@ -63,10 +67,12 @@ function App() {
   return (
     <>
       <ContextProvider>
-        <RouterProvider
-          router={route}
-          fallbackElement={<LoadingSpinner asOverlay />}
-        />
+        <SocketContextProvider>
+          <RouterProvider
+            router={route}
+            fallbackElement={<LoadingSpinner asOverlay />}
+          />
+        </SocketContextProvider>
       </ContextProvider>
     </>
   );

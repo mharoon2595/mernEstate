@@ -1,10 +1,17 @@
-import React, { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useMemo,
+} from "react";
 import Quill from "quill";
 
 // Editor is an uncontrolled React component
 const Editor = forwardRef(
   ({ readOnly, defaultValue, onTextChange, onSelectionChange }, ref) => {
     const containerRef = useRef(null);
+    const quillRef = useRef(null);
     const defaultValueRef = useRef(defaultValue);
     const onTextChangeRef = useRef(onTextChange);
     const onSelectionChangeRef = useRef(onSelectionChange);
@@ -28,9 +35,13 @@ const Editor = forwardRef(
       });
 
       ref.current = quill;
+      quillRef.current = quill;
 
+      // if (defaultValueRef.current) {
+      //   quill.setContents(defaultValueRef.current);
+      // }
       if (defaultValueRef.current) {
-        quill.setContents(defaultValueRef.current);
+        quill.clipboard.dangerouslyPasteHTML(defaultValueRef.current);
       }
 
       quill.on(Quill.events.TEXT_CHANGE, (...args) => {
@@ -47,10 +58,16 @@ const Editor = forwardRef(
       };
     }, [ref]);
 
+    useEffect(() => {
+      if (quillRef.current && defaultValue) {
+        quillRef.current.clipboard.dangerouslyPasteHTML(defaultValue);
+      }
+    }, [defaultValue]);
+
     return <div ref={containerRef}></div>;
   }
 );
 
 Editor.displayName = "Editor";
 
-export default Editor;
+export default React.memo(Editor);

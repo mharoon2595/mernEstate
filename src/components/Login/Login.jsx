@@ -16,15 +16,7 @@ const UserLogin = () => {
     username: "",
     password: "",
   });
-  const {
-    signIn,
-    setUsername,
-    setSignIn,
-    setLoggedIn,
-    setEmail,
-    setUserId,
-    setExistingAvatar,
-  } = signInContext;
+  const { signIn, setSignIn, login } = signInContext;
   const { email, username, password } = inputVal;
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -70,13 +62,14 @@ const UserLogin = () => {
       const response = await data;
       console.log(response);
       await swal("Alright!", "Logged In!", "success");
-      localStorage.setItem("user", JSON.stringify(response.data));
+      login(
+        response.data.id,
+        username,
+        response.data.token,
+        response.data.avatar,
+        response.data.email
+      );
       navigate("/");
-      setUsername(username);
-      setEmail(response.data.email);
-      setUserId(response.data.id);
-      setLoggedIn(true);
-      setExistingAvatar(response.data.avatar);
     } catch (err) {
       console.log(err.response.data.message);
       const errorMsg = err.response.data.message;

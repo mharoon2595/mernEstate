@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import hamburger from "../../assets/menuIcon.png";
 import logo from "../../assets/estateLogo.png";
 import Backdrop from "./Backdrop";
@@ -9,6 +9,9 @@ import axios from "axios";
 import apiRequest from "../../../lib/apiRequest";
 import swal from "sweetalert";
 import noavatar from "../../assets/noavatar.jpg";
+import { NavLink } from "react-router-dom";
+import { useNotificationsStore } from "../../../lib/notificationsStore";
+import { SocketContext } from "../../utils/SocketContext";
 
 const Navbar = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -24,9 +27,21 @@ const Navbar = () => {
     setExistingAvatar,
     setUserId,
     setEmail,
+    userId,
   } = loggedin;
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
+  const { socket } = useContext(SocketContext);
+
+  const fetch = useNotificationsStore((state) => state.fetch);
+
+  const number = useNotificationsStore((state) => state.number);
+
+  if (userId) {
+    socket.on("getMessage", (socketData) => {
+      fetch();
+    });
+  }
 
   const logoutHandler = async () => {
     setShowDropdown(false);
@@ -49,7 +64,7 @@ const Navbar = () => {
       {modalActive && (
         <Modal active={modalActive} onClick={() => setModalActive(false)} />
       )}
-      <div className="flex  justify-between items-center">
+      <div className="flex  justify-between items-center h-[96px]">
         <div className="flex gap-5 lg:gap-7 p-4 items-center">
           <img
             src={hamburger}
@@ -64,21 +79,54 @@ const Navbar = () => {
           >
             MERNestate
           </div>
-          <div
-            className="hidden md:flex hover:scale-110 cursor-pointer"
-            onClick={() => navigate("/")}
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? " hidden md:flex bg-yellow-500 p-1 rounded-md"
+                : "hidden md:flex hover:scale-110 cursor-pointer bg-none"
+            }
+            to="/"
           >
             Home
-          </div>
-          <div className="hidden md:flex hover:scale-110 cursor-pointer">
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "hidden md:flex bg-yellow-500 p-1 rounded-md"
+                : "hidden md:flex hover:scale-110 cursor-pointer bg-none"
+            }
+            to="/about"
+          >
             About
-          </div>
-          <div className="hidden md:flex hover:scale-110 cursor-pointer">
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? " hidden md:flex bg-yellow-500 p-1 rounded-md"
+                : "hidden md:flex hover:scale-110 cursor-pointer bg-none"
+            }
+            to="/contact"
+          >
             Contact
-          </div>
-          <div className="hidden md:flex hover:scale-110 cursor-pointer">
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "hidden md:flex bg-yellow-500 p-1 rounded-md"
+                : "hidden md:flex hover:scale-110 cursor-pointer bg-none"
+            }
+            to="/agents"
+          >
             Agents
-          </div>
+          </NavLink>
         </div>
 
         <div className="sm:hidden p-2">
@@ -92,7 +140,7 @@ const Navbar = () => {
                 8
               </div>
               <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src={existingAvatar || noavatar}
                 className="h-10 w-10 rounded-full"
               />
               {username}
@@ -136,8 +184,14 @@ const Navbar = () => {
               onClick={() => setShowDropdown(true)}
               onBlur={() => setShowDropdown(false)}
             >
-              <div className="absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full">
-                8
+              <div
+                className={`${
+                  number === 0
+                    ? "hidden"
+                    : "absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full"
+                }`}
+              >
+                {number}
               </div>
               Settings <div className="rotate-90">{">"}</div>
               {showDropdown && (
@@ -171,16 +225,14 @@ const Navbar = () => {
               Sign up
             </button>
             <div className="p-2 text-lg">|</div>
-            <button className="p-2 bg-yellow-500 rounded-lg">
-              <div
-                className="hover:scale-105"
-                onClick={() => {
-                  navigate("/signin");
-                  setSignIn(true);
-                }}
-              >
-                Sign in
-              </div>
+            <button
+              className="p-2 bg-yellow-500 rounded-lg hover:scale-105"
+              onClick={() => {
+                navigate("/signin");
+                setSignIn(true);
+              }}
+            >
+              Sign in
             </button>
           </div>
         )}

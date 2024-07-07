@@ -25,7 +25,7 @@ const Main = () => {
             </>
           )}
         </div>
-        <div className="block p-2 md:flex md:flex-col md:w-2/5 gap-3 md:min-h-full md:p-5">
+        <div className="block md:flex md:flex-col md:w-2/5 gap-3 md:min-h-full md:px-5">
           {updateFlag ? (
             <>
               <div className="flex flex-col gap-2 h-full justify-center items-center">
@@ -46,10 +46,10 @@ const Main = () => {
               </div>
             </>
           ) : (
-            <>
-              <p>Messages</p>
+            <div className="hidden md:block">
+              <p className="px-3">Messages</p>
               <Messages />
-            </>
+            </div>
           )}
         </div>
       </div>

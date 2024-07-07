@@ -17,24 +17,28 @@ const MapCenterUpdater = ({ center, zoom }) => {
   return null;
 };
 
-const Map = ({ data }) => {
+const Map = ({ data, contact }) => {
+  console.log(data[0]);
   const center =
     data.length > 0 ? [data[0].latitude, data[0].longitude] : [0, 0];
-  const zoom = data.length > 0 ? 7 : 1;
+  const zoom = data.length > 0 ? 10 : 1;
 
   return (
     <MapContainer
       center={center}
       zoom={zoom}
       scrollWheelZoom={true}
-      className="h-full min-w-full min-h-[200px] z-0"
+      className={`${
+        contact ? "h-full min-w-full z-0" : "h-full min-w-full z-0"
+      }`}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <MapCenterUpdater center={center} zoom={zoom} />
-      {data.length > 0 && data.map((item) => <Pin key={item.id} item={item} />)}
+      {data.length > 0 &&
+        data.map((item) => <Pin key={item.id || item.latitude} item={item} />)}
     </MapContainer>
   );
 };

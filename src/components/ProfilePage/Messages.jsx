@@ -1,123 +1,383 @@
-import React, { useContext, useEffect, useState } from "react";
+// import React, { useContext, useEffect, useRef, useState } from "react";
+// import { UserContext } from "../../utils/Context";
+// import apiRequest from "../../../lib/apiRequest";
+// import noavatar from "../../assets/noavatar.jpg";
+// import LoadingSpinner from "../../utils/LoadingSpinner";
+// import swal from "sweetalert";
+// import { SocketContext } from "../../utils/SocketContext";
+// import ChatWindow from "./ChatWindow";
+
+// const Messages = ({ fromModal, full }) => {
+//   const { username, existingAvatar, userId } = useContext(UserContext);
+//   const { socket } = useContext(SocketContext);
+//   const [data, setData] = useState([]);
+//   const [chatID, setChatID] = useState();
+//   const [chatIDList, setChatIdList] = useState([]);
+//   const [last, setLast] = useState();
+//   const [chattingWith, setChattingWith] = useState();
+//   const [recipientID, setRecipientID] = useState();
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [chat, setChat] = useState([]);
+//   const [popUp, setPopUp] = useState(false);
+//   const [avatar, setAvatar] = useState();
+//   const messageEndRef = useRef();
+
+//   useEffect(() => {
+//     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+//   }, [chat]);
+
+//   useEffect(() => {
+//     setIsLoading(true);
+//     const fetchChats = async () => {
+//       try {
+//         const response = await apiRequest("/chats/");
+//         setData(response.data);
+
+//         if (!popUp && chatID) {
+//           setChatID("");
+//         }
+//       } catch (err) {
+//         swal(
+//           "Uh oh!",
+//           "Something went wrong, please try again in a bit",
+//           "error"
+//         );
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+//     fetchChats();
+//   }, [socket, chat]);
+
+//   useEffect(() => {
+//     if (data.length > 0) {
+//       const idList = data.map((x) => x.id);
+//       setChatIdList(idList);
+//     }
+//   }, [data]);
+
+//   useEffect(() => {
+//     const read = async () => {
+//       try {
+//         await apiRequest.put("/chats/read/" + chatID);
+//       } catch (err) {
+//         swal("Oopsie doopsie!", "Something went wrong!", "error");
+//       }
+//     };
+
+//     if (chatIDList.length > 0 && socket) {
+//       socket.on("getMessage", (socketData) => {
+//         if (chatIDList.includes(socketData.chatId)) {
+//           const index = chatIDList.indexOf(socketData.chatId);
+//           let newData = [...data];
+//           newData[index].lastMessage = socketData.text;
+//           setData(newData);
+//           if (
+//             chat &&
+//             chat?.messages.length > 0 &&
+//             chatID === socketData.chatId
+//           ) {
+//             setChat((prev) => ({
+//               ...prev,
+//               messages: [...prev.messages, socketData],
+//             }));
+//           }
+//           if (popUp) {
+//             read();
+//           }
+//         }
+//       });
+//     }
+
+//     return () => {
+//       socket.off("getMessage");
+//     };
+//   }, [socket, chat, chatIDList, data, popUp]);
+
+//   const handleClick = async (id, receiver) => {
+//     setIsLoading(true);
+
+//     try {
+//       const response = await apiRequest("/chats/" + id);
+//       setChat({ ...response.data, receiver });
+//       setIsLoading(false);
+//     } catch (err) {
+//       swal(
+//         "Oops.",
+//         "Failed to load chats, please try again in a bit.",
+//         "error"
+//       );
+//       setIsLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div
+//       className={`${
+//         fromModal ? "h-full" : "h-[80vh]"
+//       } w-full p-2 relative flex justify-center overflow-y-auto`}
+//     >
+//       {isLoading && <LoadingSpinner asOverlay />}
+//       {popUp && (
+//         <ChatWindow
+//           setPopUp={setPopUp}
+//           id={chatID}
+//           userId={userId}
+//           setLast={setLast}
+//           chat={chat}
+//           setChat={setChat}
+//           chattingWith={chattingWith}
+//           recipientID={recipientID}
+//           username={username}
+//           ref={messageEndRef}
+//           socket={socket}
+//           isLoading={isLoading}
+//           full={full}
+//           avatar={avatar}
+//         />
+//       )}
+//       <div className="flex flex-col items-center w-full h-[90%] overflow-y-auto">
+//         {data.length > 0 &&
+//           data.map((x) => {
+//             console.log("chatID--->", chatID);
+
+//             return (
+//               <div
+//                 className={`${
+//                   x.seenBy.includes(userId) || chatID === x.id
+//                     ? "bg-zinc-50"
+//                     : "bg-yellow-500"
+//                 } h-20 rounded-lg my-2 p-3 flex  justify-evenly gap-1 items-center w-full lg:w-[70%]  cursor-pointer`}
+//                 onClick={() => {
+//                   setPopUp(true);
+//                   setChatID(x.id);
+//                   setChattingWith(x.receiver.username);
+//                   setRecipientID(x.receiver.id);
+//                   setLast(x.lastMessage);
+//                   handleClick(x.id, x.receiver);
+//                   setAvatar(x.receiver.avatar || noavatar);
+//                 }}
+//                 key={x.id}
+//               >
+//                 <div>
+//                   <img
+//                     src={x.receiver.avatar || noavatar}
+//                     className="h-12 w-12 rounded-full"
+//                     alt="avatar"
+//                   />
+//                 </div>
+//                 <div>
+//                   <p className="font-bold">{x.receiver.username}</p>
+//                   <p>{x.lastMessage}</p>
+//                 </div>
+//               </div>
+//             );
+//           })}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Messages;
+
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../utils/Context";
 import apiRequest from "../../../lib/apiRequest";
 import noavatar from "../../assets/noavatar.jpg";
-import { format } from "timeago.js";
+import LoadingSpinner from "../../utils/LoadingSpinner";
+import swal from "sweetalert";
+import { SocketContext } from "../../utils/SocketContext";
+import ChatWindow from "./ChatWindow";
+import { useNotificationsStore } from "../../../lib/notificationsStore";
 
-const ChatWindow = ({ setPopUp, id, userId, setLast }) => {
-  const [messages, setMessages] = useState([]);
+const Messages = ({ fromModal, full }) => {
+  const { username, existingAvatar, userId } = useContext(UserContext);
+  const { socket } = useContext(SocketContext);
+  const [data, setData] = useState([]);
+  const [chatID, setChatID] = useState();
+  const [chatIDList, setChatIdList] = useState([]);
+  const [last, setLast] = useState();
+  const [chattingWith, setChattingWith] = useState();
+  const [recipientID, setRecipientID] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [chat, setChat] = useState([]);
+  const [popUp, setPopUp] = useState(false);
+  const [avatar, setAvatar] = useState();
+  const messageEndRef = useRef();
+  const fetch = useNotificationsStore((state) => state.fetch);
 
   useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
+
+  const decrease = useNotificationsStore((state) => state.decrease);
+
+  useEffect(() => {
+    setIsLoading(true);
     const fetchChats = async () => {
-      const data = await apiRequest("/chats/" + id);
-      console.log(data);
-      setMessages(data.data.messages);
+      try {
+        const response = await apiRequest("/chats/");
+        setData(response.data);
+
+        if (!popUp && chatID) {
+          setChatID("");
+        }
+      } catch (err) {
+        swal(
+          "Uh oh!",
+          "Something went wrong, please try again in a bit",
+          "error"
+        );
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchChats();
-  }, []);
+  }, [socket, chat]);
 
-  const submitMsg = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+  useEffect(() => {
+    if (data.length > 0) {
+      const idList = data.map((x) => x.id);
+      setChatIdList(idList);
+    }
+  }, [data]);
 
-    const text = formData.get("text");
-    console.log(text);
+  useEffect(() => {
+    const read = async () => {
+      try {
+        await apiRequest.put("/chats/read/" + chatID);
+      } catch (err) {
+        swal("Oopsie doopsie!", "Something went wrong!", "error");
+      }
+    };
 
-    const sendMessage = await apiRequest.post("/messages/" + id, { text });
-    console.log(sendMessage);
-    setMessages((prevMsgs) => [...prevMsgs, sendMessage.data]);
-    setLast(sendMessage.data.text);
-    e.target.reset();
+    if (chatIDList.length > 0 && socket) {
+      socket.on("getMessage", (socketData) => {
+        if (chatIDList.includes(socketData.chatId)) {
+          const index = chatIDList.indexOf(socketData.chatId);
+          let newData = [...data];
+          newData[index].lastMessage = socketData.text;
+          if (chatID !== socketData.chatID) {
+            newData[index].seenBy = [socketData.userId];
+          }
+          setData(newData);
+
+          if (chatID !== socketData.chatId || !chatID) {
+            console.log("fetch working from socket function");
+            fetch();
+          }
+
+          if (
+            chat &&
+            chat?.messages.length > 0 &&
+            chatID === socketData.chatId
+          ) {
+            setChat((prev) => ({
+              ...prev,
+              messages: [...prev.messages, socketData],
+            }));
+          }
+          if (popUp) {
+            read();
+          }
+        }
+      });
+    }
+
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [socket, chat, chatIDList, data, popUp]);
+
+  const handleClick = async (id, receiver) => {
+    setIsLoading(true);
+
+    try {
+      const response = await apiRequest("/chats/" + id);
+      if (!response.data.seenBy.includes(userId)) {
+        decrease();
+      }
+      setChat({ ...response.data, receiver });
+      setIsLoading(false);
+    } catch (err) {
+      swal(
+        "Oops.",
+        "Failed to load chats, please try again in a bit.",
+        "error"
+      );
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="absolute bottom-0 w-full mx-auto h-[70%] bg-white">
-      <div
-        onClick={() => setPopUp(false)}
-        className="bg-indigo-300 h-[15%] flex justify-between p-3 items-center"
-      >
-        <p>John Doe</p>
-        <p className="font-bold">X</p>
-      </div>
-      <div className="h-[65%] overflow-y-scroll">
-        {messages &&
-          messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`${
-                msg.userId === userId
-                  ? "text-right flex flex-col items-end"
-                  : "text-left flex flex-col items-start"
-              } p-1 mx-2`}
-            >
-              {msg.text}
-              <span className="text-sm bg-orange-200 ">
-                {format(msg.createdAt)}
-              </span>
-            </div>
-          ))}
-      </div>
-      <form className="h-[20%]  p-2 flex " onSubmit={submitMsg}>
-        <input
-          className="w-[90%] p-2 border-2 border-black rounded-tl-lg rounded-bl-lg"
-          type="text"
-          name="text"
-        />
-        <button
-          className="bg-yellow-500 p-2 border-2 border-black border-l-0 rounded-tr-lg rounded-br-lg"
-          type="submit"
-        >
-          Send
-        </button>
-      </form>
-    </div>
-  );
-};
-
-const Messages = () => {
-  const { username, existingAvatar, userId } = useContext(UserContext);
-  const [popUp, setPopUp] = useState(false);
-  const [data, setData] = useState(false);
-  const [chatID, setChatID] = useState();
-  const [last, setLast] = useState();
-
-  useEffect(() => {
-    const fetchChats = async () => {
-      const data = await apiRequest("/chats/");
-      console.log(data);
-      setData(data.data);
-    };
-    fetchChats();
-  }, [last]);
-
-  return (
-    <div className="h-[80vh] w-full p-2 relative flex justify-center overflow-y-auto">
+    <div
+      className={`${
+        fromModal ? "h-full" : "h-[80vh]"
+      } w-full p-2 relative flex justify-center overflow-y-auto`}
+    >
+      {isLoading && <LoadingSpinner asOverlay />}
       {popUp && (
         <ChatWindow
           setPopUp={setPopUp}
           id={chatID}
           userId={userId}
           setLast={setLast}
+          chat={chat}
+          setChat={setChat}
+          chattingWith={chattingWith}
+          recipientID={recipientID}
+          username={username}
+          ref={messageEndRef}
+          socket={socket}
+          isLoading={isLoading}
+          full={full}
+          avatar={avatar}
         />
       )}
-      {data &&
-        data.map((x) => (
-          <div
-            className="bg-zinc-50 h-20 rounded-lg my-2 p-3 flex justify-between gap-3  items-center w-[80%] "
-            onClick={() => {
-              setPopUp(true);
-              setChatID(x.id);
-            }}
-            key={x.id}
-          >
-            <img
-              src={x.receiver.avatar || noavatar}
-              className="h-12 w-12 rounded-full"
-            />
-            <p className="font-bold">{x.receiver.username}</p>
-            <p>{x.lastMessage}</p>
-          </div>
-        ))}
+      <div className="flex flex-col items-center w-full h-[90%] overflow-y-auto">
+        {data.length > 0 &&
+          data.map((x) => {
+            console.log("chatID--->", chatID);
+            console.log(
+              "current chat id:",
+              x.id,
+              "seenBy:",
+              x.seenBy.includes(userId)
+            );
+
+            return (
+              <div
+                className={`${
+                  x.seenBy.includes(userId) || chatID === x.id
+                    ? "bg-zinc-50"
+                    : "bg-yellow-500"
+                } h-20 rounded-lg my-2 p-3 flex  justify-evenly gap-1 items-center w-full lg:w-[70%]  cursor-pointer`}
+                onClick={() => {
+                  setPopUp(true);
+                  setChatID(x.id);
+                  setChattingWith(x.receiver.username);
+                  setRecipientID(x.receiver.id);
+                  setLast(x.lastMessage);
+                  handleClick(x.id, x.receiver);
+                  setAvatar(x.receiver.avatar || noavatar);
+                }}
+                key={x.id}
+              >
+                <div>
+                  <img
+                    src={x.receiver.avatar || noavatar}
+                    className="h-12 w-12 rounded-full"
+                    alt="avatar"
+                  />
+                </div>
+                <div className="w-1/2 text-left h-full">
+                  <p className="font-bold h-1/2">{x.receiver.username}</p>
+                  <p className="h-1/2 overflow-y-hidden">{x.lastMessage}</p>
+                </div>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };

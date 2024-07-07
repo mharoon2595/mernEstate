@@ -81,7 +81,7 @@ const UploadWidget = ({ onUpload, details, setState }) => {
     document.getElementById("upload_widget").addEventListener(
       "click",
       function () {
-        myWidget.open();
+        myWidget?.open();
       },
       false
     );
