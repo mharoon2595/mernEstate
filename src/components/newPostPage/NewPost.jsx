@@ -30,15 +30,12 @@ function NewPost() {
 
   const navigate = useNavigate();
 
-  console.log(imageIndex);
-
   useEffect(() => {
     const fetchFn = async () => {
       if (updatePost) {
         setIsLoading(true);
         try {
           const fetchPosts = await apiRequest("/post/" + updatePost);
-          console.log(fetchPosts);
           setData(fetchPosts.data);
           setImages(fetchPosts.data.images);
           setIsLoading(false);
@@ -65,7 +62,6 @@ function NewPost() {
     formData.append("desc", quillRef.current.root.innerHTML);
     const inputs = Object.fromEntries(formData);
     setIsLoading(true);
-    console.log(inputs);
     if (data) {
       try {
         const updateData = await apiRequest.put("/post/" + updatePost, {
@@ -97,7 +93,6 @@ function NewPost() {
         setIsLoading(false);
         navigate("/profile");
       } catch (err) {
-        console.log(err);
         swal("Uh oh", "Somethng went wrong, please try again later", "error");
         setIsLoading(false);
       }
@@ -128,11 +123,9 @@ function NewPost() {
             restaurant: parseInt(inputs.restaurant),
           },
         });
-        console.log(res.data);
         await swal("Alright!", "Upload completed successfully!", "success");
         navigate("/details/" + res.data.id);
       } catch (err) {
-        console.log(err);
         setError(error);
       }
     }

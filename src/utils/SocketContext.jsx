@@ -19,7 +19,6 @@ export const SocketContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log(userId, socket);
     userId && socket?.emit("newUser", userId);
   }, [userId, socket]);
 

@@ -21,8 +21,6 @@ const UserLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  console.log("credentials--->", email, username, password);
-
   useEffect(() => {
     setErrMsg(false);
     setInputVal({
@@ -53,14 +51,12 @@ const UserLogin = () => {
     const password = formData.get("password");
     setIsLoading(true);
 
-    console.log(username, password);
     try {
       const data = await apiRequest.post("/auth/login", {
         username,
         password,
       });
       const response = await data;
-      console.log(response);
       await swal("Alright!", "Logged In!", "success");
       login(
         response.data.id,
@@ -71,7 +67,6 @@ const UserLogin = () => {
       );
       navigate("/");
     } catch (err) {
-      console.log(err.response.data.message);
       const errorMsg = err.response.data.message;
       setErrMsg(errorMsg);
       await swal("An error occured", errorMsg, "error");
@@ -89,7 +84,6 @@ const UserLogin = () => {
 
     setIsLoading(true);
 
-    console.log(username, password, email);
     try {
       const data = await apiRequest.post("/auth/register", {
         username,
@@ -97,7 +91,6 @@ const UserLogin = () => {
         email,
       });
       const response = await data;
-      console.log(response);
       await swal(
         "Alright!",
         "Registered successfully! Please login now",
@@ -111,7 +104,6 @@ const UserLogin = () => {
         ["email"]: "",
       });
     } catch (err) {
-      console.log(err.response.data.message);
       const errorMsg = err.response.data.message;
       setErrMsg(errorMsg);
       await swal("An error occured", errorMsg, "error");
@@ -122,7 +114,6 @@ const UserLogin = () => {
 
   return (
     <>
-      {console.log(isDisabled, isRegDisabled)}
       <div className="flex h-[calc(100vh-120px)] justify-center items-center">
         <div className="relative border-[3px] border-black flex flex-col items-center gap-3 p-5 rounded-md lg:text-2xl">
           {isLoading && <LoadingSpinner asOverlay />}

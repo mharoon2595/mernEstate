@@ -14,7 +14,6 @@ const Agents = () => {
       setIsLoading(true);
       try {
         const fetch = await apiRequest("/user/");
-        console.log(fetch);
         setData(fetch.data);
         setFixedData(fetch.data);
         setIsLoading(false);
@@ -39,7 +38,6 @@ const Agents = () => {
         i.username.toLowerCase().includes(e.target.value.toLowerCase())
       );
       setData(filteredData);
-      console.log(filteredData);
     }
   };
 

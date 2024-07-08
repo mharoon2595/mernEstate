@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 
 const io = new Server({
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://mernestatebe.onrender.com",
   },
 });
 
@@ -30,7 +30,6 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", ({ receiverId, data }) => {
     const receiver = getUser(receiverId);
-    console.log(receiver);
     if (receiver) {
       io.to(receiver.socketId).emit("getMessage", data);
     }

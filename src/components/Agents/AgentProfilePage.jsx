@@ -69,11 +69,9 @@ const AgentProfilePage = () => {
       setIsLoading(true);
       try {
         const userData = await apiRequest("/user/" + loadProfile);
-        console.log(userData);
         setIsLoading(false);
         setData(userData.data.user);
       } catch (err) {
-        console.log(err);
         swal(
           "Uh oh!",
           "Something went wrong, please try again in a bit.",
@@ -84,7 +82,6 @@ const AgentProfilePage = () => {
     };
     fetchData();
   }, []);
-  console.log(data);
   return (
     <>
       {popUp && <Backdrop show={() => setPopUp(false)} />}

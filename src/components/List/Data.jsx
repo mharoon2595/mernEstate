@@ -80,16 +80,13 @@ const DataCard = ({
     if (!userId) {
       navigate("/signin");
     }
-    console.log(userID);
     try {
       const setUpChat = await apiRequest.post("/chats", {
         receiverId: userID,
       });
 
       setPopUp(true);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {

@@ -34,7 +34,6 @@ const Layout = () => {
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("user"));
-    console.log(localData);
     if (
       localData &&
       localData.token &&

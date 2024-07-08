@@ -18,7 +18,6 @@ const MapCenterUpdater = ({ center, zoom }) => {
 };
 
 const Map = ({ data, contact }) => {
-  console.log(data[0]);
   const center =
     data.length > 0 ? [data[0].latitude, data[0].longitude] : [0, 0];
   const zoom = data.length > 0 ? 10 : 1;

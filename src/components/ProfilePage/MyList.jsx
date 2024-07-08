@@ -13,11 +13,10 @@ const MyList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("change detected from fetch all posts");
       setIsLoading(true);
       try {
         const data = await apiRequest("/post/myposts");
-        console.log(data);
+
         setData(data.data);
       } catch (err) {
         swal("Uh oh", "List could not be loaded", "error");
@@ -27,11 +26,10 @@ const MyList = () => {
       }
     };
     const fetchSavedPosts = async () => {
-      console.log("change detected from fetch saved posts");
       setIsLoading(true);
       try {
         const data = await apiRequest("/user/savedposts");
-        console.log(data);
+
         setSavedData(data.data);
       } catch (err) {
         swal("Uh oh", "Saved posts could not be loaded", "error");

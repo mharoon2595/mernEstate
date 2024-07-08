@@ -23,8 +23,6 @@ const PropDetails = () => {
   const [popUp, setPopUp] = useState(false);
   const navigate = useNavigate();
 
-  console.log(params.id);
-
   useEffect(() => {
     if (data) {
       setIsSaved(true);
@@ -37,7 +35,6 @@ const PropDetails = () => {
       navigate("/signin");
     } else {
       const dispatch = await apiRequest.post("/user/save/" + params.id);
-      console.log(dispatch);
       if (dispatch.data.message === "Post removed from saved list") {
         setIsSaved(false);
         setIsLoading(false);
@@ -69,7 +66,6 @@ const PropDetails = () => {
       >
         {(postResponse) => {
           const { title, address, price, user, postDetail } = postResponse.data;
-          console.log(postResponse.data);
           setData(postResponse.data.isSaved);
           setOwnerID(user.id);
           return (
