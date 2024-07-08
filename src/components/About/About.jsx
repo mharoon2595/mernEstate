@@ -21,7 +21,7 @@ const About = () => {
           <p className="text-sm lg:text-xl">Properties sold</p>
         </div>
       </div>
-      <p className="text-sm min-h-[20%] max-h-[35%] overflow-y-auto lg:text-base">
+      <p className="text-sm my-2 lg:text-base">
         Welcome to mernEstate, where your dream home becomes a reality! Our
         dedicated team of real estate professionals is committed to providing
         exceptional service, whether you're buying, selling, or renting. With

@@ -15,7 +15,7 @@ const AgentCard = ({ avatar, username, posts, id }) => {
       }}
     >
       <img src={avatar || noavatar} className="w-12 h-12  rounded-full" />
-      <div className="w-1/2 flex flex-col items-end">
+      <div className="max-w-1/2 flex flex-col items-end  ">
         <p>{username}</p>
         <p>Posts: {posts.length}</p>
       </div>
