@@ -138,7 +138,7 @@ const Navbar = () => {
         <div className="sm:hidden p-2 max-w-[50%]">
           {loggedIn ? (
             <button
-              className="relative p-2 flex gap-2 bg-yellow-500 rounded-lg w-full  items-center cursor-pointer"
+              className="relative p-2 flex gap-2 bg-yellow-500 rounded-lg w-full justify-evenly items-center cursor-pointer"
               onClick={() => setShowDropdown(true)}
               onBlur={() => setShowDropdown(false)}
             >
