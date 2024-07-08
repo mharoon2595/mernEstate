@@ -20,7 +20,7 @@ const Modal = ({ active, onClick }) => {
   }, [active, modalHeight]);
 
   return (
-    <div className="absolute bg-black top-[40%] left-[50%] z-[1000] -translate-x-1/2 -translate-y-1/2  h-[250px] w-[50vw] flex justify-center items-center rounded-lg">
+    <div className="absolute bg-black top-[40%] left-[50%] z-[100000000] -translate-x-1/2 -translate-y-1/2  h-[250px] w-[50vw] flex justify-center items-center rounded-lg">
       <div
         className="absolute top-0 right-0 p-3 text-white font-bold cursor-pointer"
         onClick={onClick}
