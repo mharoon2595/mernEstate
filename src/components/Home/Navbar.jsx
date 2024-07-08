@@ -143,7 +143,7 @@ const Navbar = () => {
               onBlur={() => setShowDropdown(false)}
             >
               <div className="absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full">
-                8
+                {number}
               </div>
               <img
                 src={existingAvatar || noavatar}
