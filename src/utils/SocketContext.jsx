@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
   const { userId } = useContext(UserContext);
 
   useEffect(() => {
-    setSocket(io("http://localhost:4000"));
+    setSocket(io("https://mernsocket.onrender.com"));
   }, []);
 
   useEffect(() => {
