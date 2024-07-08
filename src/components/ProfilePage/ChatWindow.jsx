@@ -52,7 +52,7 @@ const ChatWindow = forwardRef(
 
     return (
       <div
-        className={`absolute bottom-5 ${
+        className={`absolute bottom-10 ${!full && "lg:bottom-0"} ${
           full && "md:bottom-12"
         } w-full mx-auto h-[70%] bg-white rounded-lg`}
       >
