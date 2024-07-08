@@ -37,6 +37,12 @@ const Navbar = () => {
 
   const number = useNotificationsStore((state) => state.number);
 
+  useEffect(() => {
+    if (userId) {
+      fetch();
+    }
+  }, []);
+
   if (userId) {
     socket.on("getMessage", (socketData) => {
       fetch();

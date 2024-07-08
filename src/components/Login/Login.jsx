@@ -114,7 +114,7 @@ const UserLogin = () => {
 
   return (
     <>
-      <div className="flex h-[calc(100vh-120px)] justify-center items-center">
+      <div className="flex h-[calc(100vh-120px)] justify-center items-center p-10">
         <div className="relative border-[3px] border-black flex flex-col items-center gap-3 p-5 rounded-md lg:text-2xl">
           {isLoading && <LoadingSpinner asOverlay />}
           {signIn ? (
