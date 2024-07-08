@@ -37,7 +37,9 @@ const Map = ({ data, contact }) => {
       />
       <MapCenterUpdater center={center} zoom={zoom} />
       {data.length > 0 &&
-        data.map((item) => <Pin key={item.id || item.latitude} item={item} />)}
+        data.map((item) => (
+          <Pin key={item.id || item.latitude} item={item} contact={contact} />
+        ))}
     </MapContainer>
   );
 };

@@ -2,11 +2,11 @@ import React from "react";
 import { Popup, Marker } from "react-leaflet";
 import { Link } from "react-router-dom";
 
-const Pin = ({ item }) => {
+const Pin = ({ item, contact }) => {
   return (
     <Marker position={[item.latitude, item.longitude]}>
       <Popup>
-        <div className="flex  gap-5 min-w-[200px]">
+        <div className={`flex  gap-5 min-w-[200px] ${contact && "hidden"}`}>
           {item.images && (
             <img
               src={item.images[0]}

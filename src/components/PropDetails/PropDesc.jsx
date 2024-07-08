@@ -2,8 +2,17 @@ import React, { useContext } from "react";
 import DOMPurify from "dompurify";
 import pin from "../../assets/pin.png";
 import { UserContext } from "../../utils/Context";
+import { useNavigate } from "react-router-dom";
 
 const PropDesc = ({ title, address, price, user, postDetail }) => {
+  const { setLoadProfile } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const loadAgentProfile = () => {
+    setLoadProfile(user.id);
+    navigate("/agentProfile");
+  };
+
   return (
     <div className=" md:h-[40%] mx-3 p-2">
       <div className="info">
@@ -16,7 +25,10 @@ const PropDesc = ({ title, address, price, user, postDetail }) => {
             </div>
             <div className="bg-orange-200 rounded-md w-fit p-1">$ {price}</div>
           </div>
-          <div className="bg-orange-200 w-28  rounded-lg p-3 flex flex-col items-center">
+          <div
+            className="bg-orange-200 w-28  rounded-lg p-3 flex flex-col items-center"
+            onClick={loadAgentProfile}
+          >
             <img src={user.avatar} alt="" className="w-20 h-20 rounded-full" />
             <span className="font-bold">{user.username}</span>
           </div>
