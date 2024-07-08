@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 
 const io = new Server({
   cors: {
-    origin: "https://mernestatebe.onrender.com",
+    origin: "https://mern-estate-4qvu.vercel.app",
   },
 });
 
