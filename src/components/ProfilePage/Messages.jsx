@@ -29,6 +29,7 @@ const Messages = ({ fromModal, full }) => {
   }, [chat]);
 
   const decrease = useNotificationsStore((state) => state.decrease);
+  const number = useNotificationsStore((state) => state.number);
 
   useEffect(() => {
     setIsLoading(true);
@@ -111,7 +112,7 @@ const Messages = ({ fromModal, full }) => {
 
     try {
       const response = await apiRequest("/chats/" + id);
-      if (!response.data.seenBy.includes(userId)) {
+      if (!response.data.seenBy.includes(userId) && number > 0) {
         decrease();
       }
       setChat({ ...response.data, receiver });

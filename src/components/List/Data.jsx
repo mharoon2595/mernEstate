@@ -86,7 +86,13 @@ const DataCard = ({
       });
 
       setPopUp(true);
-    } catch (err) {}
+    } catch (err) {
+      swal(
+        "Uh oh!",
+        "Something went wrong, please try again in a bit",
+        "error"
+      );
+    }
   };
 
   useEffect(() => {
