@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import Pin from "./Pin"; // Make sure to import the Pin component
 
 const MapCenterUpdater = ({ center, zoom }) => {
