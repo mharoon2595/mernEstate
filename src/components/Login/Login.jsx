@@ -117,165 +117,171 @@ const UserLogin = () => {
       {userId ? (
         <Navigate to="/" />
       ) : (
-        <div className="flex h-[calc(100vh-120px)] justify-center items-center p-10">
-          <div className="relative border-[3px] border-black flex flex-col items-center gap-3 p-5 rounded-md lg:text-2xl">
-            {isLoading && <LoadingSpinner asOverlay />}
-            {signIn ? (
-              <>
-                <div className="text-center text-3xl mb-5">Sign in</div>
-                {errMsg && <p className="text-red-500 text-center">{errMsg}</p>}
-                <form
-                  className="flex flex-col items-center"
-                  onSubmit={loginHandler}
-                >
-                  <label className="text-xl">Username</label>
-                  <input
-                    className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
-                      errMsg && "bg-red-200"
-                    }`}
-                    placeholder="Username"
-                    type="text"
-                    required
-                    name="username"
-                    value={inputVal["username"]}
-                    onChange={(e) => {
-                      setErrMsg("");
-                      setInputVal({
-                        ...inputVal,
-                        ["username"]: e.target.value,
-                      });
-                    }}
-                  />
-                  <label className="text-xl">Password</label>
-                  <input
-                    className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
-                      errMsg && "bg-red-200"
-                    }`}
-                    placeholder="Password"
-                    type="password"
-                    required
-                    name="password"
-                    value={inputVal["password"]}
-                    onChange={(e) => {
-                      setErrMsg("");
-                      setInputVal({
-                        ...inputVal,
-                        ["password"]: e.target.value,
-                      });
-                    }}
-                    minLength={8}
-                  />
-                  <button
-                    className={`text-center text-xl bg-yellow-500 p-3 rounded-md ${
-                      isDisabled ? "opacity-50" : "opacity-100"
-                    }`}
-                    type="submit"
-                    disabled={isDisabled}
+        <div className="flex h-[calc(100vh-96px)] justify-center items-center ">
+          <div className="h-[70%] w-[60%]">
+            <div className="relative border-[3px] border-black flex flex-col items-center gap-3 p-5 rounded-md lg:text-2xl">
+              {isLoading && <LoadingSpinner asOverlay />}
+              {signIn ? (
+                <>
+                  <div className="text-center text-3xl mb-5">Sign in</div>
+                  {errMsg && (
+                    <p className="text-red-500 text-center">{errMsg}</p>
+                  )}
+                  <form
+                    className="flex flex-col items-center"
+                    onSubmit={loginHandler}
                   >
-                    Sign in
-                  </button>
-                </form>
-                <button
-                  className="text-center text-xl bg-yellow-500 p-3 rounded-md "
-                  onClick={() => {
-                    signInContext.setSignIn(false);
-                    setInputVal({
-                      ...inputVal,
-                      ["username"]: "",
-                      ["password"]: "",
-                      ["email"]: "",
-                    });
-                  }}
-                >
-                  New user? Sign up!
-                </button>
-              </>
-            ) : (
-              <>
-                <div className="text-center text-3xl mb-5">Register</div>
-                {errMsg && <p className="text-red-500 text-center">{errMsg}</p>}
-                <form
-                  className="flex flex-col items-center"
-                  onSubmit={registerHandler}
-                >
-                  <label className="text-xl">Email ID</label>
-                  <input
-                    className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
-                      errMsg && "bg-red-200"
-                    }`}
-                    placeholder="Email"
-                    type="email"
-                    required
-                    name="email"
-                    value={inputVal["email"]}
-                    onChange={(e) => {
-                      setErrMsg("");
-                      setInputVal({ ...inputVal, ["email"]: e.target.value });
-                    }}
-                  />
-                  <label className="text-xl">Username</label>
-                  <input
-                    className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
-                      errMsg && "bg-red-200"
-                    }`}
-                    placeholder="Username"
-                    type="text"
-                    required
-                    name="username"
-                    value={inputVal["username"]}
-                    onChange={(e) => {
-                      setErrMsg("");
-                      setInputVal({
-                        ...inputVal,
-                        ["username"]: e.target.value,
-                      });
-                    }}
-                  />
-                  <label className="text-xl">Password</label>
-                  <input
-                    className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
-                      errMsg && "bg-red-200"
-                    }`}
-                    placeholder="Password"
-                    type="password"
-                    required
-                    name="password"
-                    value={inputVal["password"]}
-                    onChange={(e) => {
-                      setErrMsg("");
-                      setInputVal({
-                        ...inputVal,
-                        ["password"]: e.target.value,
-                      });
-                    }}
-                    minLength={8}
-                  />
+                    <label className="text-xl">Username</label>
+                    <input
+                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                        errMsg && "bg-red-200"
+                      }`}
+                      placeholder="Username"
+                      type="text"
+                      required
+                      name="username"
+                      value={inputVal["username"]}
+                      onChange={(e) => {
+                        setErrMsg("");
+                        setInputVal({
+                          ...inputVal,
+                          ["username"]: e.target.value,
+                        });
+                      }}
+                    />
+                    <label className="text-xl">Password</label>
+                    <input
+                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                        errMsg && "bg-red-200"
+                      }`}
+                      placeholder="Password"
+                      type="password"
+                      required
+                      name="password"
+                      value={inputVal["password"]}
+                      onChange={(e) => {
+                        setErrMsg("");
+                        setInputVal({
+                          ...inputVal,
+                          ["password"]: e.target.value,
+                        });
+                      }}
+                      minLength={8}
+                    />
+                    <button
+                      className={`text-center text-xl bg-yellow-500 p-3 rounded-md ${
+                        isDisabled ? "opacity-50" : "opacity-100"
+                      }`}
+                      type="submit"
+                      disabled={isDisabled}
+                    >
+                      Sign in
+                    </button>
+                  </form>
                   <button
-                    className={`text-center text-xl bg-yellow-500 p-3 rounded-md ${
-                      isRegDisabled ? "opacity-50" : "opacity-100"
-                    }`}
-                    type="submit"
-                    disabled={isRegDisabled}
+                    className="text-center text-xl bg-yellow-500 p-3 rounded-md "
+                    onClick={() => {
+                      signInContext.setSignIn(false);
+                      setInputVal({
+                        ...inputVal,
+                        ["username"]: "",
+                        ["password"]: "",
+                        ["email"]: "",
+                      });
+                    }}
                   >
-                    Register
+                    New user? Sign up!
                   </button>
-                </form>
-                <button
-                  className={`text-center text-xl bg-yellow-500 p-3 rounded-md `}
-                  onClick={() => {
-                    signInContext.setSignIn(true);
-                    setInputVal({
-                      ...inputVal,
-                      ["username"]: "",
-                      ["password"]: "",
-                      ["email"]: "",
-                    });
-                  }}
-                >
-                  Already have an account? Sign in!
-                </button>
-              </>
-            )}
+                </>
+              ) : (
+                <>
+                  <div className="text-center text-3xl mb-5">Register</div>
+                  {errMsg && (
+                    <p className="text-red-500 text-center">{errMsg}</p>
+                  )}
+                  <form
+                    className="flex flex-col items-center"
+                    onSubmit={registerHandler}
+                  >
+                    <label className="text-xl">Email ID</label>
+                    <input
+                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                        errMsg && "bg-red-200"
+                      }`}
+                      placeholder="Email"
+                      type="email"
+                      required
+                      name="email"
+                      value={inputVal["email"]}
+                      onChange={(e) => {
+                        setErrMsg("");
+                        setInputVal({ ...inputVal, ["email"]: e.target.value });
+                      }}
+                    />
+                    <label className="text-xl">Username</label>
+                    <input
+                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                        errMsg && "bg-red-200"
+                      }`}
+                      placeholder="Username"
+                      type="text"
+                      required
+                      name="username"
+                      value={inputVal["username"]}
+                      onChange={(e) => {
+                        setErrMsg("");
+                        setInputVal({
+                          ...inputVal,
+                          ["username"]: e.target.value,
+                        });
+                      }}
+                    />
+                    <label className="text-xl">Password</label>
+                    <input
+                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                        errMsg && "bg-red-200"
+                      }`}
+                      placeholder="Password"
+                      type="password"
+                      required
+                      name="password"
+                      value={inputVal["password"]}
+                      onChange={(e) => {
+                        setErrMsg("");
+                        setInputVal({
+                          ...inputVal,
+                          ["password"]: e.target.value,
+                        });
+                      }}
+                      minLength={8}
+                    />
+                    <button
+                      className={`text-center text-xl bg-yellow-500 p-3 rounded-md ${
+                        isRegDisabled ? "opacity-50" : "opacity-100"
+                      }`}
+                      type="submit"
+                      disabled={isRegDisabled}
+                    >
+                      Register
+                    </button>
+                  </form>
+                  <button
+                    className={`text-center text-xl bg-yellow-500 p-3 rounded-md `}
+                    onClick={() => {
+                      signInContext.setSignIn(true);
+                      setInputVal({
+                        ...inputVal,
+                        ["username"]: "",
+                        ["password"]: "",
+                        ["email"]: "",
+                      });
+                    }}
+                  >
+                    Already have an account? Sign in!
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}
