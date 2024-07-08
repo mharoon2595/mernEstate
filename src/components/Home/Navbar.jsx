@@ -51,6 +51,7 @@ const Navbar = () => {
 
   const logoutHandler = async () => {
     setShowDropdown(false);
+
     try {
       await apiRequest.post("/auth/logout");
       localStorage.removeItem("user");

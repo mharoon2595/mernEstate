@@ -217,7 +217,7 @@ const DataCard = ({
           </div>
           <div
             className={`${
-              data.userId !== userId || userID === userId
+              data.userId !== userId || userID !== userId
                 ? "hidden"
                 : save
                 ? "hidden"
