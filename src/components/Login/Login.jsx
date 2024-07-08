@@ -118,8 +118,8 @@ const UserLogin = () => {
         <Navigate to="/" />
       ) : (
         <div className="flex h-[calc(100vh-96px)] justify-center items-center ">
-          <div className="h-[70%] w-[60%]">
-            <div className="relative border-[3px] border-black flex flex-col items-center gap-3 p-5 rounded-md lg:text-2xl">
+          <div className="h-[70%] w-[60%] md:max-w-[30%]">
+            <div className="relative border-[3px] border-black flex flex-col items-center gap-3 px-4  py-5 rounded-md text-base md:text-xl lg:text-2xl">
               {isLoading && <LoadingSpinner asOverlay />}
               {signIn ? (
                 <>
@@ -128,12 +128,12 @@ const UserLogin = () => {
                     <p className="text-red-500 text-center">{errMsg}</p>
                   )}
                   <form
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center mx-2 max-w-full"
                     onSubmit={loginHandler}
                   >
-                    <label className="text-xl">Username</label>
+                    <label className="text-base md:text-xl">Username</label>
                     <input
-                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                      className={`p-1 border-[2px] border-black mb-3 w-full rounded-md text-base md:text-xl ${
                         errMsg && "bg-red-200"
                       }`}
                       placeholder="Username"
@@ -149,9 +149,9 @@ const UserLogin = () => {
                         });
                       }}
                     />
-                    <label className="text-xl">Password</label>
+                    <label className="text-base md:text-xl">Password</label>
                     <input
-                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                      className={`p-1 border-[2px] border-black mb-3 w-full rounded-md text-base md:text-xl ${
                         errMsg && "bg-red-200"
                       }`}
                       placeholder="Password"
@@ -169,7 +169,7 @@ const UserLogin = () => {
                       minLength={8}
                     />
                     <button
-                      className={`text-center text-xl bg-yellow-500 p-3 rounded-md ${
+                      className={`text-center text-base md:text-xl bg-yellow-500 p-3 rounded-md ${
                         isDisabled ? "opacity-50" : "opacity-100"
                       }`}
                       type="submit"
@@ -179,7 +179,7 @@ const UserLogin = () => {
                     </button>
                   </form>
                   <button
-                    className="text-center text-xl bg-yellow-500 p-3 rounded-md "
+                    className="text-center text-base md:text-xl bg-yellow-500 p-3 rounded-md "
                     onClick={() => {
                       signInContext.setSignIn(false);
                       setInputVal({
@@ -200,12 +200,12 @@ const UserLogin = () => {
                     <p className="text-red-500 text-center">{errMsg}</p>
                   )}
                   <form
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center mx-2"
                     onSubmit={registerHandler}
                   >
                     <label className="text-xl">Email ID</label>
                     <input
-                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                      className={`p-1 border-[2px] border-black mb-3 w-full rounded-md text-base md:text-xl ${
                         errMsg && "bg-red-200"
                       }`}
                       placeholder="Email"
@@ -220,7 +220,7 @@ const UserLogin = () => {
                     />
                     <label className="text-xl">Username</label>
                     <input
-                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                      className={`p-1 border-[2px] border-black mb-3 w-full rounded-md text-base md:text-xl ${
                         errMsg && "bg-red-200"
                       }`}
                       placeholder="Username"
@@ -238,7 +238,7 @@ const UserLogin = () => {
                     />
                     <label className="text-xl">Password</label>
                     <input
-                      className={`p-2 border-[2px] border-black mb-3 rounded-md text-xl ${
+                      className={`p-1 border-[2px] border-black mb-3 w-full rounded-md text-base md:text-xl ${
                         errMsg && "bg-red-200"
                       }`}
                       placeholder="Password"
@@ -256,7 +256,7 @@ const UserLogin = () => {
                       minLength={8}
                     />
                     <button
-                      className={`text-center text-xl bg-yellow-500 p-3 rounded-md ${
+                      className={`text-center text-base md:text-xl bg-yellow-500 p-3 rounded-md ${
                         isRegDisabled ? "opacity-50" : "opacity-100"
                       }`}
                       type="submit"
@@ -266,7 +266,7 @@ const UserLogin = () => {
                     </button>
                   </form>
                   <button
-                    className={`text-center text-xl bg-yellow-500 p-3 rounded-md `}
+                    className={`text-center text-base md:text-xl bg-yellow-500 p-3 rounded-md `}
                     onClick={() => {
                       signInContext.setSignIn(true);
                       setInputVal({
