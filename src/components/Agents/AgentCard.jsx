@@ -8,7 +8,7 @@ const AgentCard = ({ avatar, username, posts, id }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="flex justify-center items-center w-[70%] md:w-1/3 lg:w-1/4 mx-auto md:mx-2 my-2 h-20 bg-yellow-500 rounded-lg p-3 cursor-pointer"
+      className="flex justify-evenly items-center w-[70%] md:w-1/3 lg:w-1/4 mx-auto md:mx-2 my-2 h-20 bg-yellow-500 rounded-lg p-3 cursor-pointer"
       onClick={() => {
         setLoadProfile(id);
         navigate("/agentProfile");

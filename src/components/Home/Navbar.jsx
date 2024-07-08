@@ -135,22 +135,28 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        <div className="sm:hidden p-2">
+        <div className="sm:hidden p-2 max-w-[50%]">
           {loggedIn ? (
             <button
-              className="relative p-2 flex gap-2 bg-yellow-500 rounded-lg items-center cursor-pointer"
+              className="relative p-2 flex gap-2 bg-yellow-500 rounded-lg w-full  items-center cursor-pointer"
               onClick={() => setShowDropdown(true)}
               onBlur={() => setShowDropdown(false)}
             >
-              <div className="absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full">
+              <div
+                className={`${
+                  number === 0
+                    ? "hidden"
+                    : "absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full"
+                }`}
+              >
                 {number}
               </div>
               <img
                 src={existingAvatar || noavatar}
-                className="h-10 w-10 rounded-full"
+                className="h-10 w-10 rounded-full "
               />
-              {username}
-              <div className="rotate-90">{">"}</div>
+              <p className="max-w-[25%] overflow-x-hidden">{username}</p>
+              <div className="rotate-90 max-w-[25%]">{">"}</div>
               {showDropdown && (
                 <div className="absolute -bottom-[70px] w-full left-0 z-50 px-2 rounded-md bg-teal-200">
                   <p

@@ -25,11 +25,15 @@ const AgentProfileCard = ({
     if (!userId) {
       navigate("/signin");
     }
-    const setUpChat = await apiRequest.post("/chats", {
-      receiverId: userID,
-    });
+    try {
+      const setUpChat = await apiRequest.post("/chats", {
+        receiverId: userID,
+      });
 
-    setPopUp(true);
+      setPopUp(true);
+    } catch (err) {
+      swal("Uh oh!", "Somethin went wrong, please try again in a bit", "error");
+    }
   };
 
   return (
