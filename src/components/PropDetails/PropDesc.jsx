@@ -26,7 +26,7 @@ const PropDesc = ({ title, address, price, user, postDetail }) => {
             <div className="bg-orange-200 rounded-md w-fit p-1">$ {price}</div>
           </div>
           <div
-            className="bg-orange-200 w-28  rounded-lg p-3 flex flex-col items-center"
+            className="bg-orange-200 w-28  rounded-lg p-3 flex flex-col items-center cursor-pointer"
             onClick={loadAgentProfile}
           >
             <img src={user.avatar} alt="" className="w-20 h-20 rounded-full" />

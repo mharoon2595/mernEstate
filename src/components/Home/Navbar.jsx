@@ -41,7 +41,7 @@ const Navbar = () => {
     if (userId) {
       fetch();
     }
-  }, []);
+  }, [userId]);
 
   if (userId) {
     socket.on("getMessage", (socketData) => {
