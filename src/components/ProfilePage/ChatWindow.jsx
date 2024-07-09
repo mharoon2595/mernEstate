@@ -1,6 +1,6 @@
 import { format } from "timeago.js";
 import { forwardRef } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import LoadingSpinner from "../../utils/LoadingSpinner";
 import apiRequest from "../../../lib/apiRequest";
 
@@ -50,6 +50,12 @@ const ChatWindow = forwardRef(
       }
     };
 
+ const inputRef = useRef(null);
+  const handleFocus = () => {
+    inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+    
     return (
       <div
         className={`absolute bottom-10 ${!full && "lg:bottom-0"} ${
@@ -100,6 +106,8 @@ const ChatWindow = forwardRef(
             className="w-[90%] p-2 border-2 border-black rounded-tl-lg rounded-bl-lg"
             type="text"
             name="text"
+             ref={inputRef}
+        onFocus={handleFocus}
           />
           <button
             className="bg-yellow-500 p-2 border-2 border-black border-l-0 rounded-tr-lg rounded-br-lg "
