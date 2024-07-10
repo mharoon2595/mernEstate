@@ -88,7 +88,7 @@ const RequireAuth = () => {
             modalHeight
               ? "h-[100vh]"
               : addMargin
-              ? "min-h-[100vh] mb-[80vh]"
+              ? "min-h-[100vh] mb-[60vh]"
               : "min-h-[100vh] mb-0"
           }  mx-auto max-w-[1366px]`}
         >
