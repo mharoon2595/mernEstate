@@ -67,7 +67,6 @@ const Layout = () => {
           modalHeight ? "h-[100vh]" : "min-h-[100vh]"
         }  mx-auto max-w-[1366px]`}
       >
-        <div id="backdrop" className="min-h-full"></div>
         <div className="px-3 lg:px-5">
           <Navbar />
         </div>
@@ -89,8 +88,6 @@ const RequireAuth = () => {
             modalHeight ? "h-[100vh]" : "min-h-[100vh]"
           }  mx-auto max-w-[1366px]`}
         >
-          <div id="backdrop" className="min-h-full"></div>
-          <div id="modal" className="min-h-full"></div>
           <div className="px-3 lg:px-5">
             <Navbar />
           </div>
