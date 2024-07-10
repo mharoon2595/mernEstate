@@ -24,6 +24,7 @@ const ChatWindow = forwardRef(
     },
     ref
   ) => {
+    const inputRef = useRef(null);
     const scrollToBottom = () => {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
@@ -59,9 +60,12 @@ const ChatWindow = forwardRef(
       }
     };
 
-    const inputRef = useRef(null);
     const handleFocus = () => {
-      inputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      setInputFocus(true);
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+      inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
       scrollToBottom();
     };
 
@@ -116,8 +120,7 @@ const ChatWindow = forwardRef(
             type="text"
             name="text"
             ref={inputRef}
-            onTouchStart={() => setInputFocus(true)}
-            onFocus={handleFocus}
+            onTouchStart={handleFocus}
             onBlur={() => setInputFocus(false)}
           />
           <button

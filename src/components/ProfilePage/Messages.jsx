@@ -130,7 +130,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
   return (
     <div
       className={`${
-        fromModal ? "h-[430px] md:h-[820px] " : "h-[80vh]"
+        fromModal ? "max-h-[100vh] " : "h-[80vh]"
       } w-full  p-2 relative flex justify-center overflow-y-auto`}
     >
       {isLoading && <LoadingSpinner asOverlay />}
