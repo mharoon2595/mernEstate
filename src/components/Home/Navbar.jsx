@@ -53,7 +53,7 @@ const Navbar = () => {
     setShowDropdown(false);
 
     try {
-      await apiRequest.post("/auth/logout");
+      await apiRequest("/auth/logout");
       localStorage.removeItem("user");
       setLoggedIn(false);
       setEmail("");
