@@ -19,6 +19,8 @@ const ChatWindow = forwardRef(
       isLoading,
       full,
       avatar,
+      inputFocus,
+      setInputFocus,
     },
     ref
   ) => {
@@ -50,16 +52,17 @@ const ChatWindow = forwardRef(
       }
     };
 
- const inputRef = useRef(null);
-  const handleFocus = () => {
-    inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setInputFocus(true);
-  };
- const [inputFocus, setInputFocus]=useState(false)
-    
+    const inputRef = useRef(null);
+    const handleFocus = () => {
+      inputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      setInputFocus(true);
+    };
+
     return (
       <div
-        className={`absolute bottom-10 ${inputFocus?"h-[200vh]":" h-[70%]"} ${!full && "lg:bottom-0"} ${
+        className={`absolute bottom-10 ${
+          inputFocus ? "h-[200vh]" : " h-[70%]"
+        } ${!full && "lg:bottom-0"} ${
           full && "md:bottom-12"
         } w-full mx-auto  bg-white rounded-lg`}
       >
@@ -107,9 +110,9 @@ const ChatWindow = forwardRef(
             className="w-[90%] p-2 border-2 border-black rounded-tl-lg rounded-bl-lg"
             type="text"
             name="text"
-             ref={inputRef}
-        onFocus={handleFocus}
-            onBlur={()=>setInputFocus(false)}
+            ref={inputRef}
+            onFocus={handleFocus}
+            onBlur={() => setInputFocus(false)}
           />
           <button
             className="bg-yellow-500 p-2 border-2 border-black border-l-0 rounded-tr-lg rounded-br-lg "

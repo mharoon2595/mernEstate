@@ -8,7 +8,7 @@ import { SocketContext } from "../../utils/SocketContext";
 import ChatWindow from "./ChatWindow";
 import { useNotificationsStore } from "../../../lib/notificationsStore";
 
-const Messages = ({ fromModal, full }) => {
+const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
   const { username, existingAvatar, userId } = useContext(UserContext);
   const { socket } = useContext(SocketContext);
   const [data, setData] = useState([]);
@@ -150,6 +150,8 @@ const Messages = ({ fromModal, full }) => {
           isLoading={isLoading}
           full={full}
           avatar={avatar}
+          inputFocus={inputFocus}
+          setInputFocus={setInputFocus}
         />
       )}
       <div className="flex flex-col items-center w-full h-[90%] overflow-y-auto">
