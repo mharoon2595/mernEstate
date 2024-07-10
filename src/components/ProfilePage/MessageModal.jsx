@@ -8,7 +8,7 @@ const MessageModal = ({ show, full }) => {
   return (
     <Portal containerId="modal">
       <div
-        className={`absolute flex inset-0 h-full w-full justify-center items-center z-[100000] ${
+        className={`absolute flex inset-0 min-h-full w-full justify-center items-center z-[100000] ${
           full ? "" : "md:hidden"
         }`}
       >
