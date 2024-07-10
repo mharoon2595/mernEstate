@@ -67,11 +67,6 @@ const ChatWindow = forwardRef(
       if (inputRef.current) {
         setTimeout(() => {
           inputRef.current.focus();
-          inputRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-          scrollToBottom();
         }, 100);
       }
     };

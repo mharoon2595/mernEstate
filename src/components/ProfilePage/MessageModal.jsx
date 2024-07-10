@@ -11,11 +11,7 @@ const MessageModal = ({ show, full }) => {
         full ? "" : "md:hidden"
       }`}
     >
-      <div
-        className={`bg-slate-400 w-[80%] h-[80%] ${
-          addMargin ? "mb-[60vh]" : "mb-0"
-        } rounded-md  p-2`}
-      >
+      <div className={`bg-slate-400 w-[80%] h-[80%]  rounded-md  p-2`}>
         <p
           className="text-right px-3 font-bold cursor-pointer"
           onClick={() => show(false)}

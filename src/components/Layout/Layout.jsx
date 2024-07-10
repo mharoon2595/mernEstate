@@ -78,6 +78,15 @@ const Layout = () => {
 
 const RequireAuth = () => {
   const { loggedIn, modalHeight, addMargin } = useContext(UserContext);
+
+  useEffect(() => {
+    if (addMargin) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [addMargin]);
   return (
     <>
       {!loggedIn ? (
