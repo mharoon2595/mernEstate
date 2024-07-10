@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../../utils/Context";
-import Portal from "../../utils/Portal";
 
 const Modal = ({ active, onClick }) => {
   const { modalHeight, setModalHeight } = useContext(UserContext);

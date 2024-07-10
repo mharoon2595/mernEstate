@@ -1,7 +1,6 @@
 import React from "react";
 import Messages from "./Messages";
 import { useState } from "react";
-import Portal from "../../utils/Portal";
 
 const MessageModal = ({ show, full }) => {
   const [inputFocus, setInputFocus] = useState(false);

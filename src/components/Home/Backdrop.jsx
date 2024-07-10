@@ -1,5 +1,4 @@
 import React from "react";
-import Portal from "../../utils/Portal";
 
 const Backdrop = ({ onClick, show }) => {
   return (
