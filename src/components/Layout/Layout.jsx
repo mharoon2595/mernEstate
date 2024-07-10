@@ -3,9 +3,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../Home/Navbar";
 import { UserContext } from "../../utils/Context";
 import apiRequest from "../../../lib/apiRequest";
+import CustomHook from "../../utils/CustomHook";
 
 const Layout = () => {
   let logoutTimer;
+
+  CustomHook();
   const {
     setUsername,
     setLoggedIn,
@@ -78,6 +81,7 @@ const Layout = () => {
 
 const RequireAuth = () => {
   const { loggedIn, modalHeight, addMargin } = useContext(UserContext);
+  CustomHook();
 
   useEffect(() => {
     if (addMargin) {
