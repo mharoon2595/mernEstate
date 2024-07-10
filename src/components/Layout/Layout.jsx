@@ -67,6 +67,7 @@ const Layout = () => {
           modalHeight ? "h-[100vh]" : "min-h-[100vh]"
         }  mx-auto max-w-[1366px]`}
       >
+        <div id="backdrop"></div>
         <div className="px-3 lg:px-5">
           <Navbar />
         </div>
@@ -77,13 +78,19 @@ const Layout = () => {
 };
 
 const RequireAuth = () => {
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, modalHeight } = useContext(UserContext);
   return (
     <>
       {!loggedIn ? (
         <Navigate to="/" />
       ) : (
-        <div className="relative min-h-[100vh] mx-auto max-w-[1366px] ">
+        <div
+          className={`relative ${
+            modalHeight ? "h-[100vh]" : "min-h-[100vh]"
+          }  mx-auto max-w-[1366px]`}
+        >
+          <div id="backdrop"></div>
+          <div id="modal"></div>
           <div className="px-3 lg:px-5">
             <Navbar />
           </div>
