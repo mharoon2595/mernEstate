@@ -11,8 +11,8 @@ const MessageModal = ({ show, full }) => {
       }`}
     >
       <div
-        className={`bg-slate-400 w-[80%] ${
-          inputFocus ? "h-[150vh]" : "h-[80%]"
+        className={`bg-slate-400 w-[80%] h-[80%] ${
+          inputFocus ? "pb-[50vh]" : "pb-0"
         } rounded-md  p-2`}
       >
         <p
