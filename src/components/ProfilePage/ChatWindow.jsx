@@ -59,9 +59,9 @@ const ChatWindow = forwardRef(
     
     return (
       <div
-        className={`bottom-10 ${inputFocus?"relative":"absolute"} ${!full && "lg:bottom-0"} ${
+        className={`absolute bottom-10 ${inputFocus?"h-[200vh]":" h-[70%]"} ${!full && "lg:bottom-0"} ${
           full && "md:bottom-12"
-        } w-full mx-auto h-[70%] bg-white rounded-lg`}
+        } w-full mx-auto  bg-white rounded-lg`}
       >
         {isLoading && <LoadingSpinner asOverlay />}
         <div
