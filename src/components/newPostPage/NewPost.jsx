@@ -30,10 +30,7 @@ function NewPost() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("image index--->", imageIndex);
-  }, [imageIndex]);
-
+  
   useEffect(() => {
     const fetchFn = async () => {
       if (updatePost) {
