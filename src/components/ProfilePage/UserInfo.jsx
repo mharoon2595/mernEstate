@@ -4,10 +4,13 @@ import noavatar from "../../assets/noavatar.jpg";
 import chat from "../../assets/chat.png";
 import MessageModal from "./MessageModal";
 import Backdrop from "../Home/Backdrop";
+import { useNotificationsStore } from "../../../lib/notificationsStore";
 
 const UserInfo = ({ update }) => {
   const { username, email, setUpdateFlag, updateFlag, existingAvatar } =
     useContext(UserContext);
+
+  const number = useNotificationsStore((state) => state.number);
 
   const [showModal, setShowModal] = useState(false);
   return (
@@ -37,9 +40,18 @@ const UserInfo = ({ update }) => {
           <div className="flex md:hidden items-center gap-2">
             <p className="">Chats:</p>
             <div
-              className="bg-yellow-500 rounded-full flex justify-center items-center h-14 w-14 p-3 cursor-pointer"
+              className="relative bg-yellow-500 rounded-full flex justify-center items-center h-14 w-14 p-3 cursor-pointer"
               onClick={() => setShowModal(true)}
             >
+              <div
+                className={`${
+                  number === 0
+                    ? "hidden"
+                    : "absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full"
+                }`}
+              >
+                {number}
+              </div>
               <img src={chat} className="h-10 w-10" />
             </div>
           </div>
