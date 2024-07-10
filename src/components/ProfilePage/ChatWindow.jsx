@@ -73,9 +73,9 @@ const ChatWindow = forwardRef(
 
     return (
       <div
-        className={`absolute bottom-10 ${addMargin ? "h-full" : " h-[70%]"} ${
-          !full && "lg:bottom-0"
-        } ${full && "md:bottom-12"} w-full mx-auto  bg-white rounded-lg`}
+        className={`absolute bottom-10 h-[70%] ${!full && "lg:bottom-0"} ${
+          full && "md:bottom-12"
+        } w-full mx-auto  bg-white rounded-lg`}
       >
         {isLoading && <LoadingSpinner asOverlay />}
         <div

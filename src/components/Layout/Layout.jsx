@@ -81,6 +81,7 @@ const RequireAuth = () => {
 
   useEffect(() => {
     if (addMargin) {
+      console.log("runnin bruv!");
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: "smooth",
@@ -97,7 +98,7 @@ const RequireAuth = () => {
             modalHeight
               ? "h-[100vh]"
               : addMargin
-              ? "min-h-[100vh] mb-[60vh]"
+              ? "min-h-[100vh] mb-[50vh]"
               : "min-h-[100vh] mb-0"
           }  mx-auto max-w-[1366px]`}
         >
