@@ -26,6 +26,7 @@ export const ContextProvider = ({ children }) => {
   const [token, setToken] = useState();
   const [modalHeight, setModalHeight] = useState(false);
   const [tokenExpirationTime, setTokenExpirationTime] = useState(null);
+  const [addMargin, setAddMargin] = useState(false);
   const [msgID, setMsgID] = useState();
 
   const login = (uid, username, token, avatar, email, expirationTime) => {
@@ -83,6 +84,8 @@ export const ContextProvider = ({ children }) => {
         setTokenExpirationTime,
         msgID,
         setMsgID,
+        addMargin,
+        setAddMargin,
       }}
     >
       {children}

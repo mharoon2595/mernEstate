@@ -1,8 +1,9 @@
 import { format } from "timeago.js";
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "../../utils/LoadingSpinner";
 import apiRequest from "../../../lib/apiRequest";
+import { UserContext } from "../../utils/Context";
 
 const ChatWindow = forwardRef(
   (
@@ -25,6 +26,7 @@ const ChatWindow = forwardRef(
     ref
   ) => {
     const inputRef = useRef(null);
+    const { addMargin, setAddMargin } = useContext(UserContext);
     const scrollToBottom = () => {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
@@ -61,7 +63,7 @@ const ChatWindow = forwardRef(
     };
 
     const handleFocus = () => {
-      setInputFocus(true);
+      setAddMargin(true);
       if (inputRef.current) {
         setTimeout(() => {
           inputRef.current.focus();
@@ -76,7 +78,7 @@ const ChatWindow = forwardRef(
 
     return (
       <div
-        className={`absolute bottom-10 ${inputFocus ? "h-full" : " h-[70%]"} ${
+        className={`absolute bottom-10 ${addMargin ? "h-full" : " h-[70%]"} ${
           !full && "lg:bottom-0"
         } ${full && "md:bottom-12"} w-full mx-auto  bg-white rounded-lg`}
       >
@@ -126,7 +128,7 @@ const ChatWindow = forwardRef(
             name="text"
             ref={inputRef}
             onTouchStart={handleFocus}
-            onBlur={() => setInputFocus(false)}
+            onBlur={() => setAddMargin(false)}
           />
           <button
             className="bg-yellow-500 p-2 border-2 border-black border-l-0 rounded-tr-lg rounded-br-lg "

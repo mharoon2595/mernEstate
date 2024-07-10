@@ -77,7 +77,7 @@ const Layout = () => {
 };
 
 const RequireAuth = () => {
-  const { loggedIn, modalHeight } = useContext(UserContext);
+  const { loggedIn, modalHeight, addMargin } = useContext(UserContext);
   return (
     <>
       {!loggedIn ? (
@@ -85,7 +85,11 @@ const RequireAuth = () => {
       ) : (
         <div
           className={`relative ${
-            modalHeight ? "h-[100vh]" : "min-h-[100vh]"
+            modalHeight
+              ? "h-[100vh]"
+              : addMargin
+              ? "min-h-[100vh] mb-[80vh]"
+              : "min-h-[100vh] mb-0"
           }  mx-auto max-w-[1366px]`}
         >
           <div className="px-3 lg:px-5">
