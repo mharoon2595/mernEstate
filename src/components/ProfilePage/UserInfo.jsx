@@ -12,7 +12,7 @@ const UserInfo = ({ update }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      {showModal && <Backdrop />}
+      {showModal && <Backdrop onClick={() => setShowModal(false)} />}
       {showModal && <MessageModal show={setShowModal} />}
       <div className="flex justify-between p-5">
         <p className="text-lg">User Information</p>

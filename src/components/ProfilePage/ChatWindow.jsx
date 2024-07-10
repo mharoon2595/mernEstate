@@ -24,6 +24,13 @@ const ChatWindow = forwardRef(
     },
     ref
   ) => {
+    const scrollToBottom = () => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    };
+
     const submitMsg = async (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
@@ -55,7 +62,7 @@ const ChatWindow = forwardRef(
     const inputRef = useRef(null);
     const handleFocus = () => {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-      setInputFocus(true);
+      scrollToBottom();
     };
 
     return (
@@ -109,6 +116,7 @@ const ChatWindow = forwardRef(
             type="text"
             name="text"
             ref={inputRef}
+            onTouchStart={() => setInputFocus(true)}
             onFocus={handleFocus}
             onBlur={() => setInputFocus(false)}
           />
