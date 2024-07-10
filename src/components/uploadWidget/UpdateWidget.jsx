@@ -7,8 +7,8 @@ const UpdateWidget = ({ details, setState, data, index, setImageIndex }) => {
       (error, result) => {
         if (!error && result && result.event === "success") {
           setState(index, result.info.secure_url);
-          setImageIndex("");
         }
+        setImageIndex("");
       }
     );
 

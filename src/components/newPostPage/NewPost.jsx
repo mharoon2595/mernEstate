@@ -31,6 +31,10 @@ function NewPost() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("image index--->", imageIndex);
+  }, [imageIndex]);
+
+  useEffect(() => {
     const fetchFn = async () => {
       if (updatePost) {
         setIsLoading(true);
@@ -48,7 +52,7 @@ function NewPost() {
     fetchFn();
 
     return () => setUpdatePost(false);
-  }, {});
+  }, []);
 
   const updateItemAtIndex = (index, newValue) => {
     const newImages = [...images];
