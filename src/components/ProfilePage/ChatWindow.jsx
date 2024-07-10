@@ -26,13 +26,7 @@ const ChatWindow = forwardRef(
     ref
   ) => {
     const inputRef = useRef(null);
-    const { addMargin, setAddMargin } = useContext(UserContext);
-    const scrollToBottom = () => {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
-    };
+    const { setAddMargin } = useContext(UserContext);
 
     const submitMsg = async (e) => {
       e.preventDefault();

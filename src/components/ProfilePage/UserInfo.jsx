@@ -47,7 +47,7 @@ const UserInfo = ({ update }) => {
                 className={`${
                   number === 0
                     ? "hidden"
-                    : "absolute -top-3 -right-2 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full"
+                    : "absolute -top-2 -right-1 bg-red-500 w-5 h-5 text-xs text-white font-semibold flex justify-center items-center rounded-full"
                 }`}
               >
                 {number}
