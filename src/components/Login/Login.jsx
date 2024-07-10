@@ -15,6 +15,7 @@ const UserLogin = () => {
     email: "",
     username: "",
     password: "",
+    confirmPass: "",
   });
   const { signIn, setSignIn, login, userId } = signInContext;
   const { email, username, password } = inputVal;
@@ -28,6 +29,7 @@ const UserLogin = () => {
       ["username"]: "",
       ["password"]: "",
       ["email"]: "",
+      ["confirmPass"]: "",
     });
   }, [signIn]);
 
@@ -80,7 +82,13 @@ const UserLogin = () => {
     const formData = new FormData(event.target);
     const username = formData.get("username");
     const password = formData.get("password");
+    const confirmPass = formData.get("cpassword");
     const email = formData.get("email");
+
+    if (password !== confirmPass) {
+      setErrMsg("Passwords do not match");
+      return;
+    }
 
     setIsLoading(true);
 
@@ -247,10 +255,28 @@ const UserLogin = () => {
                       name="password"
                       value={inputVal["password"]}
                       onChange={(e) => {
-                        setErrMsg("");
+                        errMsg && setErrMsg("");
                         setInputVal({
                           ...inputVal,
                           ["password"]: e.target.value,
+                        });
+                      }}
+                      minLength={8}
+                    />
+                    <input
+                      className={`p-1 border-[2px] border-black mb-3 w-full rounded-md text-base md:text-xl ${
+                        errMsg && "bg-red-200"
+                      }`}
+                      placeholder="Confirm Password"
+                      type="password"
+                      required
+                      name="cpassword"
+                      value={inputVal["confirmPass"]}
+                      onChange={(e) => {
+                        errMsg && setErrMsg("");
+                        setInputVal({
+                          ...inputVal,
+                          ["confirmPass"]: e.target.value,
                         });
                       }}
                       minLength={8}
