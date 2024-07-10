@@ -9,7 +9,7 @@ const CustomHook = () => {
       const id = setInterval(() => {
         swal(
           "IMPORTANT!",
-          "Please enable all cookies and enable tracking features for account related and chat features to work correctly on this website.",
+          "Please enable all cookies and tracking features for account related and chat features to work correctly on this website.",
           "warning"
         );
       }, 1000 * 60 * 60);
@@ -23,7 +23,7 @@ const CustomHook = () => {
     !popUp &&
     swal(
       "IMPORTANT!",
-      "Please enable all cookies and enable tracking features for account related and chat features to work correctly on this website.",
+      "Please enable all cookies and tracking features for account related and chat features to work correctly on this website.",
       "warning"
     )
   );
