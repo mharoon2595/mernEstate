@@ -53,6 +53,13 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
       }
     };
     fetchChats();
+    if (socket) {
+      socket.on("getMessage", () => fetchChats());
+    }
+
+    return () => {
+      socket.off("getMessage");
+    };
   }, [socket, chat, trigger]);
 
   useEffect(() => {
