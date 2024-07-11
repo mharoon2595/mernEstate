@@ -4,9 +4,12 @@ import Navbar from "../Home/Navbar";
 import { UserContext } from "../../utils/Context";
 import apiRequest from "../../../lib/apiRequest";
 import CustomHook from "../../utils/CustomHook";
+import { SocketContext } from "../../utils/SocketContext";
 
 const Layout = () => {
   let logoutTimer;
+
+  const { socket } = useContext(SocketContext);
 
   CustomHook();
   const {
@@ -34,6 +37,7 @@ const Layout = () => {
     setExistingAvatar(null);
     localStorage.removeItem("user");
     await apiRequest("/auth/logout");
+    socket.disconnect();
   }, []);
 
   useEffect(() => {
