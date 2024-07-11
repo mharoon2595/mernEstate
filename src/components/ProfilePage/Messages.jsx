@@ -21,6 +21,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
   const [chat, setChat] = useState([]);
   const [popUp, setPopUp] = useState(false);
   const [avatar, setAvatar] = useState();
+  const [trigger, setTrigger] = useState(false);
   const messageEndRef = useRef();
   const fetch = useNotificationsStore((state) => state.fetch);
 
@@ -52,7 +53,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
       }
     };
     fetchChats();
-  }, [socket, chat]);
+  }, [socket, chat, trigger]);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -80,6 +81,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
             newData[index].seenBy = [socketData.userId];
           }
           setData(newData);
+          setTrigger((prev) => !prev);
 
           if (chatID !== socketData.chatId || !chatID) {
             fetch();
