@@ -63,6 +63,7 @@ const Navbar = () => {
     } catch (err) {
       swal("Oops", "Something went wrong, please try again in a bit!", "error");
     }
+    socket.disconnect();
   };
 
   return (
