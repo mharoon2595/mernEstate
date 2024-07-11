@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
   const { userId } = useContext(UserContext);
 
   useEffect(() => {
-    setSocket(io("https://socket-solitary-rain-4275.fly.dev"));
+    setSocket(io("https://mernestatesocket.onrender.com"));
   }, []);
 
   useEffect(() => {
