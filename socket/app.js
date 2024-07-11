@@ -1,4 +1,18 @@
 import { Server } from "socket.io";
+import express from "express";
+import cors from "cors";
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.get("/api/stayActive", (req, res, next) => {
+  res.status(200).json({ message: "Hello world" });
+});
+
+app.listen(3000, () => {
+  console.log("Server is running");
+});
 
 const io = new Server({
   cors: {
