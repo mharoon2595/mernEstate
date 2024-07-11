@@ -8,7 +8,7 @@ const MessageModal = ({ show, full }) => {
   return (
     <div
       className={`absolute flex inset-0 min-h-full w-full justify-center items-center z-[100000] ${
-        full ? "" : "md:hidden"
+        !full && "md:hidden"
       }`}
     >
       <div className={`bg-slate-400 w-[80%] h-[80%] rounded-md  p-2`}>
