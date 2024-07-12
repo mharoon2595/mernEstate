@@ -32,9 +32,7 @@ const addUser = (userId, socketId) => {
 };
 
 const removeUser = (socketId) => {
-  onlineUsers = onlineUsers.filter((user) => {
-    user.socketId !== socketId;
-  });
+  onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
 };
 
 const getUser = (userId) => {
