@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
   const { userId } = useContext(UserContext);
 
   useEffect(() => {
-    setSocket(io("https://mernsocket.onrender.com"));
+    setSocket(io("https://current-dominica-devinthemaking-721da948.koyeb.app/"));
   }, []);
 
   useEffect(() => {

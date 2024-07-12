@@ -10,11 +10,13 @@ app.get("/api/stayActive", (req, res, next) => {
   res.status(200).json({ message: "Hello world" });
 });
 
-app.listen(3000, () => {
-  console.log("Server is running");
+const PORT = process.env.PORT || 3000;
+
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
-const io = new Server({
+const io = new Server(server, {
   cors: {
     origin: "https://mernestate.vercel.app",
   },
@@ -40,10 +42,12 @@ const getUser = (userId) => {
 io.on("connection", (socket) => {
   socket.on("newUser", (userId) => {
     addUser(userId, socket.id);
+    console.log("online users--->", onlineUsers);
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
     const receiver = getUser(receiverId);
+    console.log(receiver);
     if (receiver) {
       io.to(receiver.socketId).emit("getMessage", data);
     }
@@ -51,7 +55,6 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     removeUser(socket.id);
+    console.log("online users--->", onlineUsers);
   });
 });
-
-io.listen("4000");

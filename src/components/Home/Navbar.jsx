@@ -45,6 +45,7 @@ const Navbar = () => {
 
   if (userId) {
     socket.on("getMessage", (socketData) => {
+      console.log("getMessage triggered for updating notification nubmer")
       fetch();
     });
   }
