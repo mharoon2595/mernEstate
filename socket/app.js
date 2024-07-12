@@ -43,10 +43,12 @@ const getUser = (userId) => {
 io.on("connection", (socket) => {
   socket.on("newUser", (userId) => {
     addUser(userId, socket.id);
+    console.log("online users--->,onlineUsers);
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
     const receiver = getUser(receiverId);
+    console.log(receiver);
     if (receiver) {
       io.to(receiver.socketId).emit("getMessage", data);
     }
@@ -54,5 +56,6 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     removeUser(socket.id);
+    console.log("online users--->,onlineUsers);
   });
 });
