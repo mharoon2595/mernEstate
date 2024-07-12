@@ -203,7 +203,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
             );
           })}
       </div>
-      {data.length === 0 && <p>No chats yet.</p>}
+      {data.length === 0 && <p className="text-center">No chats yet.</p>}
     </div>
   );
 };
