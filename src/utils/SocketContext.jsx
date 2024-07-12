@@ -15,11 +15,14 @@ export const SocketContextProvider = ({ children }) => {
   const { userId } = useContext(UserContext);
 
   useEffect(() => {
-    setSocket(io("https://current-dominica-devinthemaking-721da948.koyeb.app/"));
+    setSocket(
+      io("https://current-dominica-devinthemaking-721da948.koyeb.app/")
+    );
   }, []);
 
   useEffect(() => {
     userId && socket?.emit("newUser", userId);
+    console.log("workin bruv");
   }, [userId, socket]);
 
   return (
