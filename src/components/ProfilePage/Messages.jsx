@@ -54,7 +54,9 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
     };
     fetchChats();
     if (socket) {
-      socket.on("getMessage", () => fetchChats());
+      socket.on("getMessage", () => {
+        console.log("getMessage triggered for fetchChats()")
+        fetchChats());
     }
 
     return () => {
@@ -80,6 +82,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
 
     if (chatIDList.length > 0 && socket) {
       socket.on("getMessage", (socketData) => {
+        console.log("getMessage triggered for for updating chat window")
         if (chatIDList.includes(socketData.chatId)) {
           const index = chatIDList.indexOf(socketData.chatId);
           let newData = [...data];
