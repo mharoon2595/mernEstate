@@ -32,7 +32,9 @@ const addUser = (userId, socketId) => {
 };
 
 const removeUser = (socketId) => {
-  onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+  onlineUsers = onlineUsers.filter((user) => {
+    user.socketId !== socketId;
+  });
 };
 
 const getUser = (userId) => {
@@ -56,5 +58,6 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     removeUser(socket.id);
     console.log("online users--->", onlineUsers);
+    console.log("user disconnected");
   });
 });
