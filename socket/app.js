@@ -43,7 +43,7 @@ const getUser = (userId) => {
 io.on("connection", (socket) => {
   socket.on("newUser", (userId) => {
     addUser(userId, socket.id);
-    console.log("online users--->,onlineUsers);
+    console.log("online users--->",onlineUsers);
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
@@ -56,6 +56,6 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     removeUser(socket.id);
-    console.log("online users--->,onlineUsers);
+    console.log("online users--->",onlineUsers);
   });
 });
