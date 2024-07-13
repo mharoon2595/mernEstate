@@ -29,6 +29,7 @@ export const ContextProvider = ({ children }) => {
   const [addMargin, setAddMargin] = useState(false);
   const [msgID, setMsgID] = useState();
   const [popUp, setPopUp] = useState(false);
+  const [runSocket, setRunSocket] = useState(false);
 
   const login = (uid, username, token, avatar, email, expirationTime) => {
     setUserId(uid);
@@ -89,6 +90,8 @@ export const ContextProvider = ({ children }) => {
         setAddMargin,
         popUp,
         setPopUp,
+        runSocket,
+        setRunSocket,
       }}
     >
       {children}

@@ -28,6 +28,7 @@ const Navbar = () => {
     setUserId,
     setEmail,
     userId,
+    runSocket,
   } = loggedin;
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
@@ -40,15 +41,13 @@ const Navbar = () => {
   useEffect(() => {
     if (userId) {
       fetch();
+      if (socket && userId) {
+        socket.on("getMessage", (socketData) => {
+          fetch();
+        });
+      }
     }
-  }, [userId]);
-
-  if (userId) {
-    socket.on("getMessage", (socketData) => {
-      console.log("getMessage triggered for updating notification nubmer")
-      fetch();
-    });
-  }
+  }, [userId, socket]);
 
   const logoutHandler = async () => {
     setShowDropdown(false);

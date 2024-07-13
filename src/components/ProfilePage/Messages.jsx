@@ -9,7 +9,8 @@ import ChatWindow from "./ChatWindow";
 import { useNotificationsStore } from "../../../lib/notificationsStore";
 
 const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
-  const { username, existingAvatar, userId } = useContext(UserContext);
+  const { username, existingAvatar, userId, setRunSocket } =
+    useContext(UserContext);
   const { socket } = useContext(SocketContext);
   const [data, setData] = useState([]);
   const [chatID, setChatID] = useState();
@@ -33,6 +34,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
   const number = useNotificationsStore((state) => state.number);
 
   useEffect(() => {
+    setRunSocket(true);
     setIsLoading(true);
     const fetchChats = async () => {
       try {
@@ -53,16 +55,12 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
       }
     };
     fetchChats();
-    if (socket) {
-      socket.on("getMessage", () => {
-        console.log("getMessage triggered for fetchChats()");
-        fetchChats();
-      });
-    }
 
-    return () => {
-      socket.off("getMessage");
-    };
+    socket.on("getMessage", () => {
+      fetchChats();
+    });
+
+    return () => setRunSocket(false);
   }, [socket, chat, trigger]);
 
   useEffect(() => {
@@ -81,44 +79,35 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
       }
     };
 
-    if (chatIDList.length > 0 && socket) {
-      socket.on("getMessage", (socketData) => {
-        console.log("getMessage triggered for for updating chat window");
-        if (chatIDList.includes(socketData.chatId)) {
-          const index = chatIDList.indexOf(socketData.chatId);
-          let newData = [...data];
-          newData[index].lastMessage = socketData.text;
-          if (chatID !== socketData.chatID) {
-            newData[index].seenBy = [socketData.userId];
-          }
-          setData(newData);
-          setTrigger((prev) => !prev);
+    const handleGetMessage = (socketData) => {
+      if (chatIDList.includes(socketData.chatId)) {
+        setTrigger((prev) => !prev);
 
-          if (chatID !== socketData.chatId || !chatID) {
-            fetch();
-          }
-
-          if (
-            chat &&
-            chat?.messages.length > 0 &&
-            chatID === socketData.chatId
-          ) {
-            setChat((prev) => ({
-              ...prev,
-              messages: [...prev.messages, socketData],
-            }));
-          }
-          if (popUp) {
-            read();
-          }
+        if (chatID !== socketData.chatId || !chatID) {
+          fetch();
         }
-      });
-    }
 
-    return () => {
-      socket.off("getMessage");
+        if (chat && chat?.messages.length > 0 && chatID === socketData.chatId) {
+          setChat((prev) => ({
+            ...prev,
+            messages: [...prev.messages, socketData],
+          }));
+        }
+
+        if (popUp) {
+          read();
+        }
+      }
     };
-  }, [socket, chat, chatIDList, data, popUp]);
+
+    if (socket) {
+      socket.on("getMessage", handleGetMessage);
+
+      return () => {
+        socket.off("getMessage", handleGetMessage);
+      };
+    }
+  }, [socket, chatID, chatIDList, chat]);
 
   const handleClick = async (id, receiver) => {
     setIsLoading(true);
