@@ -43,6 +43,7 @@ const Navbar = () => {
       fetch();
       if (socket && userId) {
         socket.on("getMessage", (socketData) => {
+          console.log("navbar socket update");
           fetch();
         });
       }
