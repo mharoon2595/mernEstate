@@ -15,13 +15,14 @@ export const SocketContextProvider = ({ children }) => {
   const { userId } = useContext(UserContext);
 
   useEffect(() => {
-    setSocket(io("https://mernestate-hak6.onrender.com"));
+    setSocket(
+      io("https://current-dominica-devinthemaking-721da948.koyeb.app/")
+    );
   }, []);
 
   useEffect(() => {
     userId && socket?.emit("newUser", userId);
   }, [userId, socket]);
-  7 - 8;
 
   return (
     <SocketContext.Provider value={{ socket }}>

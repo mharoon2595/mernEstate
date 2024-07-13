@@ -5,7 +5,7 @@ import Carousel from "./Testimonials";
 const About = () => {
   return (
     <div className="min-h-[100vh] mx-auto w-[70%] py-5 lg:p-6 flex flex-col items-center gap-5 overflow-clip ">
-      <div className="p-5 flex justify-evenly gap-5 text-lg  items-center">
+      <div className="p-5 flex justify-evenly gap-2 md:gap-5 text-lg  items-center">
         <div className="flex flex-col items-center gap-2 lg:text-4xl">
           <Counter num={4.7} decimal />
           <p className="text-sm lg:text-xl">Avg. rating</p>

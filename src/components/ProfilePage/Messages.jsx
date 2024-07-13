@@ -156,7 +156,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
           setInputFocus={setInputFocus}
         />
       )}
-      <div className="flex flex-col items-center w-full h-[90%] overflow-y-auto">
+      <div className="flex flex-col items-center w-full h-[90%] overflow-y-auto overflow-x-hidden">
         {data.length > 0 &&
           data.map((x) => {
             return (
@@ -186,7 +186,9 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
                 </div>
                 <div className="w-1/2 text-left h-full">
                   <p className="font-bold h-1/2">{x.receiver.username}</p>
-                  <p className="h-1/2 overflow-y-hidden">{x.lastMessage}</p>
+                  <p className="h-1/2 overflow-y-hidden overflow-x-hidden">
+                    {x.lastMessage}
+                  </p>
                 </div>
               </div>
             );
