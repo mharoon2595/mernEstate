@@ -3,6 +3,7 @@ import DOMPurify from "dompurify";
 import pin from "../../assets/pin.png";
 import { UserContext } from "../../utils/Context";
 import { useNavigate } from "react-router-dom";
+import noavatar from "../../assets/noavatar.jpg";
 
 const PropDesc = ({ title, address, price, user, postDetail }) => {
   const { setLoadProfile } = useContext(UserContext);
@@ -29,7 +30,11 @@ const PropDesc = ({ title, address, price, user, postDetail }) => {
             className="bg-orange-200 w-28  rounded-lg p-3 flex flex-col items-center cursor-pointer"
             onClick={loadAgentProfile}
           >
-            <img src={user.avatar} alt="" className="w-20 h-20 rounded-full" />
+            <img
+              src={user.avatar || noavatar}
+              alt=""
+              className="w-20 h-20 rounded-full"
+            />
             <span className="font-bold">{user.username}</span>
           </div>
         </div>
