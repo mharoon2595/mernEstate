@@ -173,7 +173,7 @@ const DataCard = ({
           to={"/details/" + id}
           className="w-full xxs:w-1/2 sm:w-1/3 lg:w-1/2 h-40 object-fill rounded-lg"
         >
-          <img src={images[0]} className="rounded-lg"></img>
+          <img src={images[0]} className="rounded-lg w-full h-full"></img>
         </Link>
         <div className="flex xxs:w-1/2 sm:w-2/3 lg:w-1/2 flex-col justify-between gap-2 px-2">
           <Link to={"/details/" + id}>

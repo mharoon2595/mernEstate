@@ -76,6 +76,9 @@ const PropDetails = () => {
                 {popUp && <MessageModal show={setPopUp} full />}
                 <div className="block md:flex md:flex-col md:gap-5 md:w-3/5 md:min-h-full">
                   <Snaps images={postResponse.data.images} />
+                  <p className="text-center italic font-light">
+                    Click on images to view them in full-screen
+                  </p>
                   <PropDesc
                     title={title}
                     address={address}
