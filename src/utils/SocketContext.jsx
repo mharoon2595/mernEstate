@@ -18,7 +18,7 @@ export const SocketContextProvider = ({ children }) => {
     setSocket(
       io("https://current-dominica-devinthemaking-721da948.koyeb.app/")
     );
-  }, [loggedIn]);
+  }, [userId]);
 
   useEffect(() => {
     userId && socket?.emit("newUser", userId);
