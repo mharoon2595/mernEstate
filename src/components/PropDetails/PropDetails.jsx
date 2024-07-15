@@ -18,6 +18,7 @@ const PropDetails = () => {
   const [data, setData] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [ownerID, setOwnerID] = useState();
+  const [modalActive, setModalActive] = useState(false);
   const userData = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(false);
@@ -54,6 +55,7 @@ const PropDetails = () => {
     });
 
     setPopUp(true);
+    setModalActive(true);
   };
 
   return (
@@ -72,8 +74,17 @@ const PropDetails = () => {
             <>
               <div className="hidden md:flex absolute w-2/5 min-h-full bg-[#FFDAB9] z-[-1] right-0 top-0"></div>
               <div className="flex flex-col h-full md:flex-row md:min-h-full">
-                {popUp && <Backdrop show={() => setPopUp(false)} />}
-                {popUp && <MessageModal show={setPopUp} full />}
+                {popUp && (
+                  <Backdrop show={() => setPopUp(false)} fromMsgModal />
+                )}
+                {popUp && (
+                  <MessageModal
+                    show={setPopUp}
+                    full
+                    active={modalActive}
+                    onClick={() => setModalActive(false)}
+                  />
+                )}
                 <div className="block md:flex md:flex-col md:gap-5 md:w-3/5 md:min-h-full">
                   <Snaps images={postResponse.data.images} />
                   <p className="text-center italic font-light">

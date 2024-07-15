@@ -13,10 +13,19 @@ const UserInfo = ({ update }) => {
   const number = useNotificationsStore((state) => state.number);
 
   const [showModal, setShowModal] = useState(false);
+  const [modalActive, setModalActive] = useState(false);
   return (
     <>
-      {showModal && <Backdrop onClick={() => setShowModal(false)} />}
-      {showModal && <MessageModal show={setShowModal} />}
+      {showModal && (
+        <Backdrop onClick={() => setShowModal(false)} fromMsgModal />
+      )}
+      {showModal && (
+        <MessageModal
+          show={setShowModal}
+          active={modalActive}
+          onClick={() => setModalActive(false)}
+        />
+      )}
       <div className="flex justify-between p-5">
         <p className="text-lg">User Information</p>
         <button
@@ -41,7 +50,10 @@ const UserInfo = ({ update }) => {
             <p className="">Chats:</p>
             <div
               className="relative bg-yellow-500 rounded-full flex justify-center items-center h-14 w-14 p-3 cursor-pointer"
-              onClick={() => setShowModal(true)}
+              onClick={() => {
+                setShowModal(true);
+                setModalActive(true);
+              }}
             >
               <div
                 className={`${

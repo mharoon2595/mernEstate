@@ -17,6 +17,7 @@ const AgentProfileCard = ({
   email,
   popUp,
   setPopUp,
+  setModalActive,
 }) => {
   const navigate = useNavigate();
   const { userId } = useContext(UserContext);
@@ -32,6 +33,7 @@ const AgentProfileCard = ({
       });
 
       setPopUp(true);
+      setModalActive(true);
     } catch (err) {
       swal(
         "Uh oh!",
@@ -72,6 +74,7 @@ const AgentProfilePage = () => {
   const { loadProfile } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(false);
+  const [modalActive, setModalActive] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,8 +96,15 @@ const AgentProfilePage = () => {
   }, []);
   return (
     <>
-      {popUp && <Backdrop show={() => setPopUp(false)} />}
-      {popUp && <MessageModal show={setPopUp} full />}
+      {popUp && <Backdrop show={() => setPopUp(false)} fromMsgModal />}
+      {popUp && (
+        <MessageModal
+          show={setPopUp}
+          full
+          active={modalActive}
+          onClick={() => setModalActive(false)}
+        />
+      )}
       <div className={`h-[calc(100vh-96px)]  p-3 ${!popUp && "relative"}`}>
         {isLoading && <LoadingSpinner asOverlay />}
         <div className="h-full w-full flex flex-col items-center gap-5 p-3 lg:p-10">
@@ -107,6 +117,7 @@ const AgentProfilePage = () => {
               date={data.createdAt}
               popUp={popUp}
               setPopUp={setPopUp}
+              setModalActive={setModalActive}
             />
           )}
           <p className="text-lg font-semibold">Properties listed:</p>

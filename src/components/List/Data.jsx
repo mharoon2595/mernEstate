@@ -68,6 +68,7 @@ const DataCard = ({
   const { userId, setUpdatePost } = useContext(UserContext);
   const [saved, setSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [modalActive, setModalActive] = useState(false);
 
   const navigate = useNavigate();
 
@@ -87,6 +88,7 @@ const DataCard = ({
       });
 
       setPopUp(true);
+      setModalActive(true);
     } catch (err) {
       swal(
         "Uh oh!",
@@ -163,8 +165,16 @@ const DataCard = ({
       {showModal && (
         <DeleteModal deleteHandler={deleteHandler} show={setShowModal} />
       )}
-      {popUp && <Backdrop show={() => setPopUp(false)} />}
-      {popUp && <MessageModal show={setPopUp} full />}
+      {popUp && <Backdrop show={() => setPopUp(false)} fromMsgModal />}
+      {popUp && (
+        <MessageModal
+          popUp={popUp}
+          show={setPopUp}
+          full
+          active={modalActive}
+          onClick={() => setModalActive(false)}
+        />
+      )}
       <div
         className={`flex flex-col xxs:flex-row gap-5 w-full mb-10 ${
           showModal || popUp ? "static" : "relative"
