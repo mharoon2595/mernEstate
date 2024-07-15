@@ -22,7 +22,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     userId && socket?.emit("newUser", userId);
-    socket.on("userConnected", () => {
+    socket?.on("userConnected", () => {
       alert("User connected to socket server.");
     });
   }, [userId, socket]);

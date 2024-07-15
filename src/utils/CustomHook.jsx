@@ -25,7 +25,7 @@ const CustomHook = () => {
     swal(
       "IMPORTANT!",
       `${`Please enable all cookies and tracking features for account related and chat features to work correctly on this website. 
-        Also, please wait for the "socket connection established" message to be able to chat live. If it does not pop up soon, please refresh the page.`}`,
+        Also, please wait for the "user connected to socket server" message to be able to chat live. If it does not pop up after logging in, please refresh the page.`}`,
       "warning"
     )
   );
