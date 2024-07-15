@@ -110,7 +110,7 @@ const AgentProfilePage = () => {
             />
           )}
           <p className="text-lg font-semibold">Properties listed:</p>
-          <div className="h-1/2 overflow-y-auto">
+          <div className=" lg:min-h-[50%] lg:overflow-y-auto">
             {data && <Data data={data.posts} fromAgentProfile />}
           </div>
         </div>
