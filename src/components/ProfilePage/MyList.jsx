@@ -52,7 +52,7 @@ const MyList = () => {
           Add New Post
         </button>
       </div>
-      <div className="overflow-y-auto h-[calc(100vh-490px)]">
+      <div className="md:overflow-y-auto md:h-[calc(100vh-490px)]">
         <Data
           profile
           save={false}

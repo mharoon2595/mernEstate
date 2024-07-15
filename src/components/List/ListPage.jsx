@@ -33,7 +33,7 @@ const ListPage = () => {
   return (
     <>
       {isLoading && <LoadingSpinner asOverlay />}
-      <div className="flex flex-col-reverse lg:flex-row gap-2 px-3 lg:px-14 w-full lg:h-[calc(100vh-140px)]">
+      <div className="flex flex-col-reverse lg:flex-row gap-2 px-3 lg:px-14 w-full lg:h-[calc(100vh-140px)] ">
         <div className="lg:w-3/5">
           <Filter setIsLoading={setIsLoading} />
           <Suspense fallback={<LoadingSpinner asOverlay />}>

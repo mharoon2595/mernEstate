@@ -24,6 +24,7 @@ const AgentProfileCard = ({
   const addChat = async () => {
     if (!userId) {
       navigate("/signin");
+      return;
     }
     try {
       const setUpChat = await apiRequest.post("/chats", {
@@ -32,7 +33,11 @@ const AgentProfileCard = ({
 
       setPopUp(true);
     } catch (err) {
-      swal("Uh oh!", "Somethin went wrong, please try again in a bit", "error");
+      swal(
+        "Uh oh!",
+        "Something went wrong, please try again in a bit.",
+        "error"
+      );
     }
   };
 

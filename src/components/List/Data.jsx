@@ -79,6 +79,7 @@ const DataCard = ({
   const addChat = async () => {
     if (!userId) {
       navigate("/signin");
+      return;
     }
     try {
       const setUpChat = await apiRequest.post("/chats", {
@@ -89,7 +90,7 @@ const DataCard = ({
     } catch (err) {
       swal(
         "Uh oh!",
-        "Something went wrong, please try again in a bit",
+        "Something went wrong, please try again in a bit.",
         "error"
       );
     }
@@ -122,6 +123,7 @@ const DataCard = ({
     setIsLoading(true);
     if (!userId) {
       navigate("/signin");
+      return;
     } else {
       try {
         const dispatch = await apiRequest.post("/user/save/" + id);
@@ -193,7 +195,7 @@ const DataCard = ({
             <div className="flex gap-2">
               <button
                 className={`${
-                  fromAgentProfile
+                  fromAgentProfile || (save && userID === userId)
                     ? "hidden"
                     : saved || save
                     ? "bg-yellow-500"
@@ -261,7 +263,7 @@ const Data = ({
         !fromProfile
           ? fromAgentProfile
             ? "h-fit"
-            : "overflow-y-auto h-[calc(100vh-360px)]"
+            : "overflow-visible lg:overflow-y-auto lg:h-[calc(100vh-360px)]"
           : ""
       } px-5 ${!showModal && !popUp && "relative"}`}
     >
