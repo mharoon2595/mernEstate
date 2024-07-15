@@ -100,14 +100,12 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
       }
     };
 
-    if (socket) {
-      socket.on("getMessage", handleGetMessage);
+    socket.on("getMessage", handleGetMessage);
 
-      return () => {
-        socket.off("getMessage", handleGetMessage);
-      };
-    }
-  }, [socket, chatID, chatIDList, chat]);
+    return () => {
+      socket.off("getMessage", handleGetMessage);
+    };
+  }, [socket, chatID, chatIDList, chat, popUp]);
 
   const handleClick = async (id, receiver) => {
     setIsLoading(true);
