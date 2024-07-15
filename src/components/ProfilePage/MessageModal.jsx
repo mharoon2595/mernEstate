@@ -7,7 +7,6 @@ const MessageModal = ({ active, show, full, onClick, popUp }) => {
   const { addMargin, modalHeight, setModalHeight } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(active);
     if (active || popUp) {
       document.body.style.overflow = "hidden";
       setModalHeight(true);

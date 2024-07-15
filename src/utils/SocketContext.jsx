@@ -21,6 +21,12 @@ export const SocketContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    socket?.on("connect", () => {
+      alert("Socket connection established!");
+    });
+  }, [socket]);
+
+  useEffect(() => {
     userId && socket?.emit("newUser", userId);
   }, [userId, socket]);
 

@@ -9,7 +9,8 @@ const CustomHook = () => {
       const id = setInterval(() => {
         swal(
           "IMPORTANT!",
-          "Please enable all cookies and tracking features for account related and chat features to work correctly on this website.",
+          `${`Please enable all cookies and tracking features for account related and chat features to work correctly on this website. 
+            Also, please wait for the "socket connection established" message to be able to chat live. If it does not pop up soon, please refresh the page.`}`,
           "warning"
         );
       }, 1000 * 60 * 60);
@@ -23,7 +24,8 @@ const CustomHook = () => {
     !popUp &&
     swal(
       "IMPORTANT!",
-      "Please enable all cookies and tracking features for account related and chat features to work correctly on this website.",
+      `${`Please enable all cookies and tracking features for account related and chat features to work correctly on this website. 
+        Also, please wait for the "socket connection established" message to be able to chat live. If it does not pop up soon, please refresh the page.`}`,
       "warning"
     )
   );
