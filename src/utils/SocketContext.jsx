@@ -1,26 +1,35 @@
-import {
-  createContext,
-  useState,
-  useCallback,
-  useEffect,
-  useContext,
-} from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { io } from "socket.io-client";
 import { UserContext } from "./Context";
 
 export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
-  // const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
   const { userId } = useContext(UserContext);
 
-  const socket = io("https://mernestate-hak6.onrender.com");
+  useEffect(() => {
+    const newSocket = io("https://mernestate-hak6.onrender.com", {
+      withCredentials: true,
+    });
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.close();
+    };
+  }, []);
 
   useEffect(() => {
-    userId && socket?.emit("newUser", userId);
-    socket?.on("userConnected", () => {
-      alert("User connected to socket server.");
-    });
+    if (userId && socket) {
+      socket.emit("newUser", userId);
+      socket.on("userConnected", () => {
+        alert("User connected to socket server.");
+      });
+
+      return () => {
+        socket.off("userConnected");
+      };
+    }
   }, [userId, socket]);
 
   return (
