@@ -9,9 +9,7 @@ export const SocketContextProvider = ({ children }) => {
   const { userId } = useContext(UserContext);
 
   useEffect(() => {
-    const newSocket = io("https://mernestate-hak6.onrender.com", {
-      withCredentials: true,
-    });
+    const newSocket = io("https://mernestate-hak6.onrender.com");
     setSocket(newSocket);
 
     return () => {
