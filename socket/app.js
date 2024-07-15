@@ -45,6 +45,7 @@ io.on("connection", (socket) => {
   socket.on("newUser", (userId) => {
     addUser(userId, socket.id);
     console.log("online users--->", onlineUsers);
+    socket.emit("userConnected");
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
