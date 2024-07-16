@@ -94,7 +94,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
           }));
         }
 
-        if (popUp) {
+        if (chatID === socketData.chatId) {
           read();
         }
       }
@@ -105,7 +105,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
     return () => {
       socket.off("getMessage", handleGetMessage);
     };
-  }, [socket, chatID, chatIDList, chat, popUp]);
+  }, [socket, chatID, chatIDList, chat]);
 
   const handleClick = async (id, receiver) => {
     setIsLoading(true);
