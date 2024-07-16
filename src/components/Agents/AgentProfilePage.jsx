@@ -44,7 +44,7 @@ const AgentProfileCard = ({
   };
 
   return (
-    <div className="min-h-[30%] w-full md:w-[50%] rounded-lg bg-yellow-500 p-2">
+    <div className="min-h-[40%] w-full md:w-[50%] rounded-lg bg-yellow-500 p-2">
       <p className="text-center h-5 text-lg font-bold">Agent information</p>
       <div className="h-[calc(100%-20px)] flex justify-evenly p-5 gap-5 items-center">
         <img

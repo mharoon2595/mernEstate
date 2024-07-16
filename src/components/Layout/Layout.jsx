@@ -24,7 +24,6 @@ const Layout = () => {
     setTokenExpirationTime,
     login,
     modalHeight,
-    addMargin,
   } = useContext(UserContext);
 
   const logout = useCallback(async () => {
@@ -68,24 +67,11 @@ const Layout = () => {
     }
   }, [token, tokenExpirationTime, logout]);
 
-  useEffect(() => {
-    if (addMargin) {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [addMargin]);
-
   return (
     <>
       <div
         className={`relative ${
-          modalHeight
-            ? "h-[100vh]"
-            : addMargin
-            ? "min-h-[100vh] mb-[40vh]"
-            : "min-h-[100vh] mb-0"
+          modalHeight ? "h-[100vh]" : "min-h-[100vh] mb-0"
         }  mx-auto max-w-[1366px]`}
       >
         <div className="px-3 lg:px-5">
@@ -98,17 +84,9 @@ const Layout = () => {
 };
 
 const RequireAuth = () => {
-  const { loggedIn, modalHeight, addMargin } = useContext(UserContext);
+  const { loggedIn, modalHeight } = useContext(UserContext);
   CustomHook();
 
-  useEffect(() => {
-    if (addMargin) {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [addMargin]);
   return (
     <>
       {!loggedIn ? (
@@ -116,11 +94,7 @@ const RequireAuth = () => {
       ) : (
         <div
           className={`relative ${
-            modalHeight
-              ? "h-[100vh]"
-              : addMargin
-              ? "min-h-[100vh] mb-[40vh]"
-              : "min-h-[100vh] mb-0"
+            modalHeight ? "h-[100vh]" : "min-h-[100vh] mb-0"
           }  mx-auto max-w-[1366px]`}
         >
           <div className="px-3 lg:px-5">

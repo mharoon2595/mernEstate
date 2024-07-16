@@ -4,7 +4,7 @@ import { useState } from "react";
 import { UserContext } from "../../utils/Context";
 
 const MessageModal = ({ active, show, full, onClick, popUp }) => {
-  const { addMargin, modalHeight, setModalHeight } = useContext(UserContext);
+  const { modalHeight, setModalHeight } = useContext(UserContext);
 
   useEffect(() => {
     if (active || popUp) {

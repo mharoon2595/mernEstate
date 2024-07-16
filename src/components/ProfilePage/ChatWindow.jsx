@@ -22,11 +22,11 @@ const ChatWindow = forwardRef(
       avatar,
       inputFocus,
       setInputFocus,
+      setChatID,
     },
     ref
   ) => {
     const inputRef = useRef(null);
-    const { setAddMargin } = useContext(UserContext);
 
     const submitMsg = async (e) => {
       e.preventDefault();
@@ -57,7 +57,6 @@ const ChatWindow = forwardRef(
     };
 
     const handleFocus = () => {
-      setAddMargin(true);
       if (inputRef.current) {
         setTimeout(() => {
           inputRef.current.focus();
@@ -81,7 +80,10 @@ const ChatWindow = forwardRef(
           </div>
           <p
             className="font-bold cursor-pointer"
-            onClick={() => setPopUp(false)}
+            onClick={() => {
+              setPopUp(false);
+              setChatID("");
+            }}
           >
             X
           </p>
@@ -117,7 +119,6 @@ const ChatWindow = forwardRef(
             name="text"
             ref={inputRef}
             onTouchStart={handleFocus}
-            onBlur={() => setAddMargin(false)}
           />
           <button
             className="bg-yellow-500 p-2 border-2 border-black border-l-0 rounded-tr-lg rounded-br-lg "

@@ -87,7 +87,11 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
           fetch();
         }
 
-        if (chat && chat?.messages.length > 0 && chatID === socketData.chatId) {
+        if (
+          chat &&
+          chat?.messages?.length > 0 &&
+          chatID === socketData.chatId
+        ) {
           setChat((prev) => ({
             ...prev,
             messages: [...prev.messages, socketData],
@@ -152,6 +156,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
           avatar={avatar}
           inputFocus={inputFocus}
           setInputFocus={setInputFocus}
+          setChatID={setChatID}
         />
       )}
       <div className="flex flex-col items-center w-full h-[90%] overflow-y-auto overflow-x-hidden">
