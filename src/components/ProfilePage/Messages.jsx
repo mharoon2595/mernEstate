@@ -99,6 +99,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
         }
 
         if (chatID === socketData.chatId) {
+          console.log("read executing!!!");
           read();
         }
       }
@@ -116,7 +117,9 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
 
     try {
       const response = await apiRequest("/chats/" + id);
+      console.log("number--->", number);
       if (!response.data.seenBy.includes(userId) && number > 0) {
+        console.log("decrease running!");
         decrease();
       }
       setChat({ ...response.data, receiver });
