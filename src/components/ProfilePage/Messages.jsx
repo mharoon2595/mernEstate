@@ -9,11 +9,11 @@ import ChatWindow from "./ChatWindow";
 import { useNotificationsStore } from "../../../lib/notificationsStore";
 
 const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
-  const { username, existingAvatar, userId, setRunSocket } =
+  const { username, existingAvatar, userId, setRunSocket, chatID, setChatID } =
     useContext(UserContext);
   const { socket } = useContext(SocketContext);
   const [data, setData] = useState([]);
-  const [chatID, setChatID] = useState();
+
   const [chatIDList, setChatIdList] = useState([]);
   const [last, setLast] = useState();
   const [chattingWith, setChattingWith] = useState();
@@ -99,7 +99,6 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
         }
 
         if (chatID === socketData.chatId) {
-          console.log("read executing!!!");
           read();
         }
       }
@@ -117,9 +116,7 @@ const Messages = ({ fromModal, full, inputFocus, setInputFocus }) => {
 
     try {
       const response = await apiRequest("/chats/" + id);
-      console.log("number--->", number);
       if (!response.data.seenBy.includes(userId) && number > 0) {
-        console.log("decrease running!");
         decrease();
       }
       setChat({ ...response.data, receiver });

@@ -29,6 +29,7 @@ export const ContextProvider = ({ children }) => {
   const [msgID, setMsgID] = useState();
   const [popUp, setPopUp] = useState(false);
   const [runSocket, setRunSocket] = useState(false);
+  const [chatID, setChatID] = useState();
 
   const login = (uid, username, token, avatar, email, expirationTime) => {
     setUserId(uid);
@@ -85,7 +86,8 @@ export const ContextProvider = ({ children }) => {
         setTokenExpirationTime,
         msgID,
         setMsgID,
-
+        chatID,
+        setChatID,
         popUp,
         setPopUp,
         runSocket,

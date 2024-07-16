@@ -29,6 +29,7 @@ const Navbar = () => {
     setEmail,
     userId,
     runSocket,
+    chatID,
   } = loggedin;
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Navbar = () => {
       fetch();
       if (socket && userId) {
         socket.on("getMessage", (socketData) => {
-          fetch();
+          if (chatID !== socketData.chatID) fetch();
         });
       }
     }
