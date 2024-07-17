@@ -3,7 +3,13 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+  origin: "https://mernestate.vercel.app",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/api/stayActive", (req, res, next) => {
@@ -18,7 +24,9 @@ const server = app.listen(PORT, () => {
 
 const io = new Server(server, {
   cors: {
-    origin: true,
+    origin: "https://mernestate.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
