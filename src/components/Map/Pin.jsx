@@ -16,7 +16,7 @@ const Pin = ({ item, contact }) => {
               />
             )}
             <div className="flex flex-col gap-1 justify-between">
-              <Link to={`/${item.id}`}>{item.title}</Link>
+              <Link to={`/details/${item.id}`}>{item.title}</Link>
 
               <div>{item.bedroom} bedrooms</div>
               <div>$ {item.price} </div>
