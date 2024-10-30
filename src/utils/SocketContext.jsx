@@ -10,7 +10,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     const newSocket = io(
-      "https://current-dominica-devinthemaking-721da948.koyeb.app/"
+      "https://psychological-shalna-devinthemaking-5c7896fb.koyeb.app/"
     );
     setSocket(newSocket);
 
