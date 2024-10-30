@@ -10,7 +10,7 @@ const CustomHook = () => {
         swal(
           "IMPORTANT!",
           `${`Please enable all cookies and tracking features for account related and chat features to work correctly on this website. 
-            Also, please wait for the "user connected to socket server" message to be able to chat live. If it does not pop up after logging in, please refresh the page.`}`,
+ This website will not work properly in incognito mode/private mode in some browsers.`}`,
           "warning"
         );
       }, 1000 * 60 * 60);
@@ -24,8 +24,7 @@ const CustomHook = () => {
     !popUp &&
     swal(
       "IMPORTANT!",
-      `${`Please enable all cookies and tracking features for account related and chat features to work correctly on this website. 
-        Also, please wait for the "user connected to socket server" message to be able to chat live. If it does not pop up after logging in, please refresh the page.`}`,
+      `${`Please enable all cookies and tracking features for account related and chat features to work correctly on this website. This website will not work properly in incognito/private mode in some browsers.`}`,
       "warning"
     )
   );
